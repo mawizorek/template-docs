@@ -3,7 +3,12 @@
 The gold-standard content repo. **Pure markdown, and that is the point.**
 
 **Live site:** https://maw-agents.github.io/template-docs/
-**Rendered by:** https://github.com/maw-agents/doc-render-engine
+**Rendered by:** https://github.com/mawizorek/doc-render-engine
+
+> ⚠️ **This repo has not been transferred yet.** The engine now lives under
+> `mawizorek`; this one is still under `maw-agents`, which means the deploy
+> token cannot reach it. See the engine README, Setup. The Live site line above
+> changes the moment this repo moves.
 
 ---
 
