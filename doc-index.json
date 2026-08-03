@@ -1,0 +1,122 @@
+{
+  "site": "template",
+  "name": "Doc Family Template",
+  "base_url": "https://mawizorek.github.io/template-docs/",
+  "built": "2026-08-03T17:15:45Z",
+  "engine": "0.1.0",
+  "engine_ref": "077f141da5fb222f42933ab8265efe601e89a594",
+  "pages": [
+    {
+      "id": "authoring",
+      "type": "page",
+      "title": "Authoring",
+      "url": "authoring/",
+      "status": "public"
+    },
+    {
+      "id": "documentation-review",
+      "type": "standard",
+      "title": "Documentation review",
+      "url": "standards/documentation-review/",
+      "status": "public"
+    },
+    {
+      "id": "example-house",
+      "type": "venue",
+      "title": "Example House",
+      "url": "venues/example-house/",
+      "status": "public"
+    },
+    {
+      "id": "frontmatter",
+      "type": "page",
+      "title": "Frontmatter",
+      "url": "authoring/frontmatter/",
+      "status": "public"
+    },
+    {
+      "id": "home",
+      "type": "page",
+      "title": "Doc Family Template",
+      "url": "./",
+      "status": "public"
+    },
+    {
+      "id": "links",
+      "type": "page",
+      "title": "Links",
+      "url": "authoring/links/",
+      "status": "public"
+    },
+    {
+      "id": "main-stage",
+      "type": "space",
+      "title": "Main Stage",
+      "url": "venues/example-house/main-stage/",
+      "status": "public"
+    },
+    {
+      "id": "onboarding-a-site",
+      "type": "procedure",
+      "title": "Onboarding a new site",
+      "url": "standards/onboarding-a-site/",
+      "status": "public"
+    },
+    {
+      "id": "publication",
+      "type": "page",
+      "title": "Publication states",
+      "url": "authoring/publication/",
+      "status": "public"
+    },
+    {
+      "id": "reference",
+      "type": "reference",
+      "title": "Reference",
+      "url": "reference/",
+      "status": "public"
+    },
+    {
+      "id": "rigging-inspection",
+      "type": "procedure",
+      "title": "Rigging inspection",
+      "url": "standards/rigging-inspection/",
+      "status": "public"
+    },
+    {
+      "id": "standards",
+      "type": "page",
+      "title": "Standards",
+      "url": "standards/",
+      "status": "public"
+    },
+    {
+      "id": "studio",
+      "type": "space",
+      "title": "Studio",
+      "url": "venues/example-house/studio/",
+      "status": "public"
+    },
+    {
+      "id": "using-these-docs",
+      "type": "page",
+      "title": "Using these docs",
+      "url": "using-these-docs/",
+      "status": "public"
+    },
+    {
+      "id": "venues",
+      "type": "page",
+      "title": "Venues",
+      "url": "venues/",
+      "status": "public"
+    },
+    {
+      "id": "writing",
+      "type": "page",
+      "title": "Writing a page",
+      "url": "authoring/writing/",
+      "status": "public"
+    }
+  ]
+}
