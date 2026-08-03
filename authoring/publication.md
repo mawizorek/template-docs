@@ -24,17 +24,62 @@ page says so plainly rather than letting somebody find out the hard way.
 Start every page at `hidden` and promote it deliberately. A page nobody has
 finished writing is a page nobody should be reading.
 
-## Folders
+`unlisted` is the right state for a page that exists to be linked TO rather than
+found: a revision log, a form, a one-off handout. It stays reachable by `@id`
+from anywhere, and an `@id` link to it is not broken.
 
-A folder's `index.md` can set the state for everything under it. Two rules that
-point deliberately in opposite directions:
+!!! warning "`unlisted` did not work until 2026-08-03"
+    It removed a page from search and left it in the sidebar, because the
+    renderer set a Material page property that hides the sidebar *on* a page
+    rather than removing that page *from* the sidebar. Nav membership is not a
+    page property in Material at all: the tree has to be edited. If you set a
+    page unlisted before that date and it stayed in the sidebar, that was the
+    bug and it is fixed. Republish.
 
-- **Access cascades down and the most protective statement wins.** A locked
-  folder beats a child page that declares itself public.
-- **Look cascades down and the most specific statement wins.** A page's own
-  `theme:` beats its folder's.
+## Removing a whole folder from the sidebar
 
-Being overridable is right for appearance and wrong for access.
+There is no folder-level switch. Set every page in the folder to `unlisted` and
+the section disappears on its own, because a section with no listed pages left
+is dropped rather than rendered as a heading that expands to nothing.
+
+The build report names any section it removes this way. That is deliberate: the
+usual cause is one page changing status and taking its entire folder off the
+sidebar with it, which is a bigger effect than the edit looked like.
+
+## There is no cascade
+
+**Every page carries its own `status:`, and nothing reads its parent's.** A
+folder's `index.md` does not set the state of the pages under it.
+
+This page previously claimed the opposite -- that access cascaded down and the
+most protective statement won. That was never implemented. It is written here
+as a retraction rather than quietly deleted, because the sentence was wrong in
+the most expensive direction available: somebody could set a folder index to
+`hidden`, believe the pages under it were covered, and publish all of them.
+
+`theme:` genuinely is inherited, and a page's own value beats its folder's.
+Being overridable is right for appearance and wrong for access, which is why
+the two are not built the same way.
+
+## Keeping a page out of an index list only
+
+`listed: false` is a different lever and does not touch publication:
+
+```yaml
+---
+id: rehearsal-studio
+title: Rehearsal Studio
+status: public
+listed: false
+---
+```
+
+That page stays in the sidebar and stays searchable. It just does not appear in
+the generated contents list of the [index page](@frontmatter) above it. Use it
+for something real but peripheral that would clutter a section's front door.
+
+An `unlisted` page is already left out of those lists, so the two never need to
+be combined.
 
 ## About `gated`
 
