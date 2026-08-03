@@ -2,8 +2,15 @@
 
 The gold-standard content repo. **Pure markdown, and that is the point.**
 
-**Live site:** https://mawizorek.github.io/template-docs/
+**Live site:** https://mawizorek.github.io/doc-render-engine/
 **Rendered by:** https://github.com/mawizorek/doc-render-engine
+
+> ℹ️ **Yes, the live URL is the engine's address and not this repo's.** Every
+> real site in the family is served from its own repo; this one is the single
+> exception, on purpose. The gold standard has to be LIVE with no secret and no
+> setup clicks, because "the spec is proved by building" is only true if the
+> build is actually reachable on day one. See `publish-default.yml` in the
+> engine.
 
 ---
 
