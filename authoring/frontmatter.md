@@ -23,7 +23,7 @@ type: space             # WHICH KIND OF THING this page is
 status: public          # hidden | unlisted | gated | public
 parent: example-house   # the id of its container, never a path
 order: 10               # sidebar weight. Absent sorts alphabetically.
-listed: false           # keep out of the parent index's contents list
+indexed: false          # keep out of the parent index page's contents list
 theme: utility          # optional skin override
 related: [studio]       # ids
 revised: 2026-08        # when this was last true
@@ -41,7 +41,7 @@ changes.
 what kind of thing this page *is*, which is what lets the renderer decide how
 to draw it. `parent` is an id, which turns a flat pile of files into a graph.
 
-**Render flags** (`status`, `order`, `listed`, `theme`). The only fields whose
+**Render flags** (`status`, `order`, `indexed`, `theme`). The only fields whose
 job is purely presentational or gating.
 
 **Provenance** (`revised`, `source`). Who to believe, and when it was last
@@ -124,11 +124,16 @@ contents: auto    # draw it from ANY type, not just index
 happens to sit above a folder of pages, like a building with its rooms in files
 underneath. `false` wins over everything.
 
-`listed:` is a CHILD deciding whether to appear in one:
+`indexed:` is a CHILD deciding whether to appear in one:
 
 ```yaml
-listed: false     # stay in the sidebar and in search, out of the list
+indexed: false    # stay in the sidebar and in search, out of the list
 ```
+
+The default is `true`, so writing it changes nothing and is only worth typing
+if you want the intent on the record. It is not an override: it will not force a
+page into the list when your prose already links it, because that would print
+the same link twice on one page.
 
 Three different things keep a page out of that list, and they are worth telling
 apart:
@@ -136,13 +141,26 @@ apart:
 | | Sidebar | Search | Index list |
 | --- | --- | --- | --- |
 | `status: unlisted` | no | no | no |
-| `listed: false` | **yes** | **yes** | no |
+| `indexed: false` | **yes** | **yes** | no |
 | linked from the body | yes | yes | no, it is filed already |
 
-So `listed: false` is for something real but peripheral that would clutter a
+So `indexed: false` is for something real but peripheral that would clutter a
 section's front door. If you want it gone from the sidebar too, that is
 `status: unlisted` and you do not need both. See
 [Publication states](@publication).
+
+!!! warning "Three things here are called an index. `indexed:` means one of them"
+    It refers to the contents list on the index **page** above this one, and
+    nothing else.
+
+    It does **not** remove the page from `doc-index.json`, the file every other
+    site in the family reads to resolve `@peer:id` links. The page is still
+    published there, and it has to be, or cross-site links to it would break.
+
+    It does **not** touch the search index either. That is `status: unlisted`.
+
+    A page with `indexed: false` is still listed in the sidebar, still
+    searchable, still linkable from anywhere, and still a public URL.
 
 ## Why the tables are generated
 

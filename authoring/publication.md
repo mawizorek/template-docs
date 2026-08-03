@@ -63,23 +63,30 @@ the two are not built the same way.
 
 ## Keeping a page out of an index list only
 
-`listed: false` is a different lever and does not touch publication:
+`indexed: false` is a different lever and does not touch publication:
 
 ```yaml
 ---
 id: rehearsal-studio
 title: Rehearsal Studio
 status: public
-listed: false
+indexed: false
 ---
 ```
 
 That page stays in the sidebar and stays searchable. It just does not appear in
 the generated contents list of the [index page](@frontmatter) above it. Use it
 for something real but peripheral that would clutter a section's front door.
+The default is `true`.
 
 An `unlisted` page is already left out of those lists, so the two never need to
 be combined.
+
+!!! warning "`indexed: false` is not a privacy setting"
+    It hides one list of links on one page. The page stays in the sidebar,
+    stays in search, stays in `doc-index.json`, and stays a public URL. If you
+    want it out of the sidebar, that is `status: unlisted` -- and read the rest
+    of this page before assuming that means protected either.
 
 ## About `gated`
 
