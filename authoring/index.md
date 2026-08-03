@@ -9,7 +9,7 @@ revised: 2026-08
 
 # Authoring
 
-Everything you need to write a page correctly, in three short documents.
+Everything you need to write a page correctly, in four short documents.
 
 ## The ninety-second version
 
@@ -41,9 +41,11 @@ Start every new page at `status: hidden`. Promote it when it is worth reading.
    breaks them silently.
 3. **Link to ids, never to file paths.** See [Links](@links).
 
-## The three documents
+## The four documents
 
 - [Frontmatter](@frontmatter) -- every field, what it does, which are required
+- [Writing a page](@writing) -- callouts, department tabs, tables, and the
+  four-space indent rule that causes most formatting trouble
 - [Links](@links) -- `@id`, headings, and cross-site references
 - [Publication](@publication) -- hidden, unlisted, gated, public, and the
   honest limits of each
