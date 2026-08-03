@@ -2,13 +2,8 @@
 
 The gold-standard content repo. **Pure markdown, and that is the point.**
 
-**Live site:** https://maw-agents.github.io/template-docs/
+**Live site:** https://mawizorek.github.io/template-docs/
 **Rendered by:** https://github.com/mawizorek/doc-render-engine
-
-> ⚠️ **This repo has not been transferred yet.** The engine now lives under
-> `mawizorek`; this one is still under `maw-agents`, which means the deploy
-> token cannot reach it. See the engine README, Setup. The Live site line above
-> changes the moment this repo moves.
 
 ---
 
@@ -30,6 +25,14 @@ frontmatter block, and where a page genuinely needs one, an image beside it.
 
 If something seems like it needs to live near the content, the answer is that
 it belongs in the engine and the hook that reaches for it is the missing piece.
+
+## The built site is on another branch, and that is deliberate
+
+The rendered HTML is pushed to `gh-pages` by the engine. It never touches
+`main`, because the green button zips the DEFAULT branch only -- so the
+download stays pure while the site still lives at a normal URL.
+
+Do not commit to `gh-pages` by hand. It is overwritten by every build.
 
 ## Why this particular repo exists
 
@@ -56,6 +59,10 @@ inherits the habits of its source.
   not build, which is how nothing goes public by accident.
 - Never change a page's `id`. Other pages link to that string.
 - Do not add a non-markdown file. That is the one rule with no exceptions.
+- **Editing here does not trigger a rebuild.** This repo holds no workflow, by
+  design. The engine rebuilds on a nightly schedule, or immediately if someone
+  runs its workflow by hand. That latency is the price of purity and it is paid
+  on purpose.
 
 ## The one thing to be honest about
 
