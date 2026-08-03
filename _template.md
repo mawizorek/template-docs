@@ -5,7 +5,7 @@ type: page
 status: hidden
 ---
 
-<!-- ─────────────────────────────────────────────────────────
+<!-- ───────────────────────────────────────
      NEW PAGE TEMPLATE
 
      1. Copy this file. Rename it kebab-case: rehearsal-studio.md
@@ -20,15 +20,19 @@ status: hidden
              without .md. SET IT ONCE AND NEVER CHANGE IT: that promise is
              what makes links survive a move.
 
-     TYPE    page | venue | space | standard | procedure | reference
+     TYPE    page | index | venue | space | standard | procedure | reference
              The type decides which fields are required and what gets
              drawn automatically. See Authoring -> Frontmatter.
+
+             index is for a folder's landing page when pointing at the pages
+             under it is the whole job. If the landing page is ABOUT
+             something -- a building, a glossary -- type it as that instead.
 
      STATUS  hidden    not built at all, URL 404s        (start here)
              unlisted  live URL, no sidebar, no search
              gated     NOT IMPLEMENTED -- behaves as unlisted
              public    listed, searchable, done
-     ───────────────────────────────────────────────────────── -->
+     ─────────────────────────────────────── -->
 
 # New page
 

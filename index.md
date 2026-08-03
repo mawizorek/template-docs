@@ -1,7 +1,7 @@
 ---
 id: home
 title: Doc Family Template
-type: page
+type: index
 status: public
 order: 0
 revised: 2026-08

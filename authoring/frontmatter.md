@@ -59,6 +59,7 @@ that does not say which building it is in is a fact with nowhere to live.
 | Type | Requires | Draws |
 | --- | --- | --- |
 | `page` | the base three | nothing extra |
+| `index` | the base three | the section contents, at the foot |
 | `venue` | the base three | address, city, operator |
 | `space` | `parent` | capacity, dimensions, grid height, power, seating, rigging |
 | `standard` | the base three | applies to, authority, review cycle |
@@ -67,6 +68,54 @@ that does not say which building it is in is a fact with nowhere to live.
 
 An undeclared type falls back to `page` and is reported. It does not break the
 build.
+
+## `index` is about POSITION, not subject
+
+Every other type says what a page is about. `index` says where it sits: it is
+the landing page of a folder, and pointing at the pages underneath it is the
+whole job.
+
+The renderer already treated `index.md` specially in three ways, all of them
+triggered by the filename -- it sorts to the top of its section, it gives the
+folder its title so the sidebar and the page agree on what a thing is called,
+and it is the page every link on the site is resolved relative to. Declaring
+the type does not change any of that. It puts the fact in the METADATA, where
+`doc-index.json` publishes it and anything reading these docs as data can see
+which pages are hubs without inspecting file paths.
+
+**Not every `index.md` should be `type: index`.** Two on this site are
+deliberately not:
+
+- [Reference](@reference) is a `reference`, because it is a glossary.
+- [Example House](@example-house) is a `venue`, because it is a building.
+
+Both are the landing page of their folder, but that is an accident of where the
+file sits rather than what the page is about. Type the subject when there is
+one. The build does not complain either way.
+
+### What it draws
+
+A contents list at the FOOT of the page -- after your prose, never above it --
+of the pages directly beneath this one: files in the same folder, plus the
+landing page of any folder one level down. It leaves out anything the body
+already links.
+
+That last part is the whole design. A good index page is prose with a line of
+explanation per link, and drawing the full list under that would duplicate
+every link and teach people to skip the writing. Drawing only what is LEFT
+means a curated index shows no list at all, and an unfiled page appears there
+until somebody files it. See [Standards](@standards), which is fully curated
+and therefore generates nothing.
+
+Two controls, both optional:
+
+```yaml
+contents: false   # draw nothing, ever
+contents: auto    # draw it from ANY type, not just index
+```
+
+`contents: auto` is for a page that is genuinely about something and also
+happens to sit above a folder of pages. `false` wins over everything.
 
 ## Why the tables are generated
 
