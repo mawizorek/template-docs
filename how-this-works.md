@@ -38,9 +38,9 @@ answering it.
 
 | Layer | Answers | Shape |
 | --- | --- | --- |
-| `hooks/` | **WHEN** things happen | fifteen two-line files |
-| `docrender/` | **WHAT** happens | seventeen Python modules |
-| `objects/` | **WHAT A PAGE IS** | eight small YAML declarations |
+| `hooks/` | **WHEN** things happen | one two-line file per stage |
+| `docrender/` | **WHAT** happens | one Python module per concern |
+| `objects/` | **WHAT A PAGE IS** | one small YAML declaration per type |
 | `theme/` + `instances/` | **WHAT IT LOOKS LIKE**, and which site this is | TSV tables and per-site config |
 
 ### `hooks/` is order and nothing else
@@ -61,12 +61,19 @@ link resolves cleanly to a URL that 404s for every reader. Written as a warning
 paragraph, that constraint survives until somebody reorders a list. Written as a
 filename, it does not have to.
 
+!!! warning "A hook file is not a hook until it is registered"
+
+    The engine's config lists the stages, and that list is the registration --
+    not the folder. A file sitting in `hooks/` and absent from the list is
+    never loaded and does nothing at all, silently. There is one in there right
+    now, harmless by luck. Adding a stage is two edits.
+
 ### `docrender/` is the code
 
 One module per concern: types, the lede, links, visibility, routers, data
-tables, markers, the published index, the size budget, the theme, the site
-identity, the nav, the page foot, the build stamp, assets, plus two shared
-helpers everything else imports.
+tables, the revision log, markers, the published index, the size budget, the
+theme, the site identity, the nav, the page foot, the build stamp, assets, plus
+two shared helpers everything else imports.
 
 One of them is imported by **two** hooks. `status:` is a single decision, but the
 renderer forces it in two passes -- every hook's file stage runs before any
@@ -91,12 +98,13 @@ code change.
 
 Then one folder per site, holding the three things that make a build *this*
 site: its name and URL and peers, its own stylesheet layer, its router table.
-**Four sites exist today**, and one of them has no theatre in it at all, which
-is the portability claim being tested rather than asserted.
+**A site is a folder of configuration, not a fork** -- and one of the sites
+live today has no theatre in it at all, which is the portability claim being
+tested rather than asserted.
 
 ## What is inline, in your markdown
 
-Five pieces of syntax do something beyond plain prose. Every one degrades
+Syntax that does something beyond plain prose. Every piece of it degrades
 gracefully: a page still reads as a document in a plain markdown viewer.
 
 | You write | It becomes |
@@ -108,8 +116,9 @@ gracefully: a page still reads as a document in a plain markdown viewer.
 | `!!! warning "Title"` + four-space body | a callout. `???` makes it collapsible |
 | `=== "Lighting"` | department tabs |
 | `<!-- dr:table circuits.tsv -->` | a declared data file, drawn **here** |
+| `<!-- dr:revlog -->` | every commit that touched a document, read out of git |
 
-The table marker is an HTML comment deliberately. It is invisible on GitHub, in
+The last two are HTML comments deliberately. They are invisible on GitHub, in
 any other renderer, and in a text editor -- so a page carrying one is still an
 ordinary document everywhere this engine is not involved.
 
@@ -146,6 +155,18 @@ tool on this site.
 
 A thing that seems to need two of those usually wants splitting, and a thing
 that fits none of them is usually content.
+
+## Two rules that explain most of the surprises
+
+**Saving is not publishing.** A content repo holds no build workflow of its own
+-- that is the purity rule -- so committing a file does nothing to the live site
+until somebody runs a publish. An unfinished page can sit in `main` for a week
+with no reader seeing it. See [Publishing](@publishing).
+
+**The site never advertises its source.** No repository widget, no star count,
+no commit links, not even on the revision log. These are finished reference
+documents, not a project looking for contributors. The one quiet *Edit this
+page* line at the foot is a deliberate exception and is switched off per site.
 
 ## Related
 
