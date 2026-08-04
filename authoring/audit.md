@@ -83,8 +83,8 @@ Two things that are always true and cause most of the trouble:
 
 ## Audit checklist
 
-Eleven questions per file. Anything that fails is in the build report by name,
-so the report is the fast version of this list.
+One pass per file. Anything that fails is in the build report by name, so the
+report is the fast version of this list.
 
 1. `id`, `title`, `status`, `summary` all present? A page missing `status` **is
    not built**; a page missing `summary` has no text in its search result.
@@ -111,6 +111,17 @@ so the report is the fast version of this list.
 11. Uncertain values carrying a [marker](@markers) rather than a bare TBD, and
     no dead keys from the table below still in the header?
 
+!!! note "This list does not say how long it is"
+
+    It used to open *"Nine questions per file,"* then *"Ten,"* then *"Eleven."*
+    Two of those were wrong on the day they were written, because the sentence
+    and the list are two places to state one fact and the list is the one that
+    gets edited.
+
+    A numbered list already carries its own count, correctly, forever. Anything
+    above it restating that number is a second claimant -- on the page whose
+    entire job is catching exactly this.
+
 ## Keys that look real and do nothing
 
 Delete on sight. None of these is read by any code in the engine, so a page
@@ -131,7 +142,7 @@ indistinguishable from the feature being broken.
 | `search:` | Nothing. `status: unlisted` removes a page from search |
 | `parent:` on a non-`space` | Nothing. Use `related:` |
 
-!!! note "The seventeen removed fields are listed individually on purpose"
+!!! note "The removed fields are listed individually on purpose"
 
     They were real until 2026-08-03 and pages in this family still carry them.
     A retired key parses as valid YAML and is silently ignored, which looks
