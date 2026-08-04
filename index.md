@@ -19,6 +19,11 @@ If you are about to write a page, read [Using these docs](@using-these-docs)
 and then [Frontmatter](@frontmatter). Between them they take about five minutes
 and cover everything that is genuinely mandatory.
 
+If you are holding something and cannot tell where it belongs -- a fact, a
+setting, a piece of behaviour -- that is [How this works](@how-this-works). It
+maps the six places anything can live and gives you the two questions that
+decide between them.
+
 If you are standing up a new site, the engine's own README is the procedure.
 This site is the thing you copy.
 
