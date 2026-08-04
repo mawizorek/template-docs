@@ -28,7 +28,8 @@ engine knows about this repo; this repo does not know about the engine.
 
 **The rule, in full: this tree holds markdown and nothing else. Ever.** No nav
 file, no template, no stylesheet, no script, no config. A `.md` file, its
-frontmatter block, and where a page genuinely needs one, an image beside it.
+frontmatter block, and where a page genuinely needs one, an image or a data
+file beside it.
 
 If something seems like it needs to live near the content, the answer is that
 it belongs in the engine and the hook that reaches for it is the missing piece.
@@ -43,6 +44,12 @@ exists. An executable one cannot do that: if the template renders correctly,
 the spec is true by demonstration. If a change breaks the contract, this site
 breaks first and loudest, before any site with actual readers.
 
+⚠️ **Being executable proves the SYNTAX, not the PROSE.** On 2026-08-03 a
+change to the engine left six pages here describing generated tables that no
+longer existed. Every one of them still built perfectly. A page can render
+flawlessly and be a lie, so a doc-rot sweep is not made redundant by this repo
+building green.
+
 So it does two jobs at once. It **documents** the authoring contract, and by
 building successfully it **proves** the contract. Every page in here is also a
 worked example of the thing it describes.
@@ -54,10 +61,14 @@ inherits the habits of its source.
 ## Working in here
 
 - Branch, commit, PR, self-merge. Never direct to `main`.
-- Every page needs `id`, `title`, and `status`. A page with no `status` does
-  not build, which is how nothing goes public by accident.
+- Every page needs `id`, `title`, `status` and `summary`. A page with no
+  `status` does not build, which is how nothing goes public by accident. A page
+  with no `summary` has no text under its name in a search result.
 - Never change a page's `id`. Other pages link to that string.
-- Do not add a non-markdown file. That is the one rule with no exceptions.
+- **No facts about the subject in the header.** No capacity, no address, no
+  owner. If a value is not needed AWAY from the page, it is prose.
+- Do not add a non-markdown file, other than an image or a declared `data:`
+  file beside the page that uses it.
 
 ## The one thing to be honest about
 
