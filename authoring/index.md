@@ -43,6 +43,12 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
    on other sites. Changing it breaks them silently.
 3. **Link to ids, never to file paths.** See [Links](@links).
 
+## Start here
+
+- [The gold standard](@audit) -- the whole frontmatter block in one copyable
+  piece, ordered required to conditional, plus a nine-question audit checklist
+  and the list of keys that look real and do nothing
+
 ## Writing
 
 - [Frontmatter](@frontmatter) -- every field, what it does, which are required
