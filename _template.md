@@ -1,9 +1,10 @@
 ---
-# REQUIRED. No status, no page. No id, no links.
+# REQUIRED. No status, no page. No id, no links. No summary, no search result.
 id: kebab-case-forever          # set once, NEVER change it
 title: What A Human Reads
 status: hidden                  # hidden -> unlisted -> public
 type: page                      # page index venue space standard procedure reference
+summary: One or two lines on what this is and who needs it.
 
 # ---- Everything below is commented. Uncomment what this page needs,
 # ---- DELETE every line you do not use, then delete these four rules.
@@ -17,6 +18,7 @@ type: page                      # page index venue space standard procedure refe
 # theme: eos
 # related: [some-id, another-id]
 # source: https://where-the-facts-came-from
+# also_known_as: [genie, personnel lift, MEWP]
 
 # CONDITIONAL - routers. All four are one feature.
 # router: [staff, pm]           # engine tables. LIST, never a repeated key
@@ -33,10 +35,15 @@ type: page                      # page index venue space standard procedure refe
      That registers it: there is no index to update and no nav file to edit.
 
      Then, in this order:
-       1. Set id and title. Set status when the page is ready to be seen.
+       1. Set id, title and summary. Set status when it is ready to be seen.
        2. Uncomment only the header lines this page needs.
        3. Delete every line you did not use -- including this comment.
-       4. Replace the H1, the lede, and the sections below.
+       4. Replace the H1 and the sections below.
+
+     ⚠️ DO NOT WRITE A PARAGRAPH UNDER THE H1. That used to be the lede and it
+     is now `summary:` above. A paragraph there renders as ordinary body text
+     under the real lede, usually saying the same thing twice, and the build
+     reports it.
 
      A page that ships carrying `Section heading`, `Revised Month Year`, or a
      stray commented-out key is the first thing an audit finds.
@@ -46,10 +53,6 @@ type: page                      # page index venue space standard procedure refe
      behind them are not restated here. -->
 
 # New page
-
-One sentence on what this is and who needs it. This renders as large lede text
-by itself, and it is also what the search result shows. Keep it to one or two
-lines and do not try to make it big yourself.
 
 ## Section heading
 
