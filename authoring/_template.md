@@ -27,8 +27,15 @@ order: 10                       # plain integer, unquoted, NO leading zero
 revised: 2026-08
 theme: eos
 related: [some-id, another-id]
+xref: [peer-site:their-page-id] # a page on a SIBLING site
 source: https://where-the-facts-came-from
-also_known_as: [genie, personnel lift, MEWP]   # renders visibly at the foot
+keywords: [genie, personnel lift, MEWP, LX]    # renders visibly at the foot
+
+# CONDITIONAL - data tables. The slot NAME must be legal for the type above.
+data:
+  schedule:                     # reference: schedule survey inventory_table
+    file: circuit-schedule.tsv  #            revision_log catalog
+    caption: Circuit schedule   # optional
 
 # CONDITIONAL - routers. All four are one feature; see the guide.
 router: [staff, pm]             # engine tables. LIST, never a repeated key
@@ -45,6 +52,32 @@ indexed: false                  # keep THIS page out of its parent's list
 
 ## First real section
 ```
+
+## What is NOT a header key
+
+The shortest way to get this right. **A key earns its place only if the value is
+needed AWAY from the page it appears on.** Everything else is prose, or a column
+in a TSV.
+
+Removed on 2026-08-03 for failing that test, and listed here because they read
+like obvious metadata and are not: `capacity` `dimensions` `grid_height` `power`
+`seating` `rigging` (a room's facts) · `address` `city` `operator`
+`access_notes` (a building's) · `owner` `frequency` `trigger` `systems` (a
+procedure's) · `applies_to` `authority` `review_cycle` (a standard's) ·
+`maintainer` `updated_by`.
+
+Nothing off the page ever read them. They were prose wearing a header's clothes.
+
+## Renamed keys still get reported
+
+| Old | New | When |
+|---|---|---|
+| `listed` | `indexed` | 2026-08-03 |
+| `also_known_as` | `keywords` | 2026-08-04 |
+
+A rename is the one change a reader of the page cannot see: the old key is valid
+YAML, so it parses, gets ignored, and the behaviour silently reverts. **Every
+retired key is named in the build report until nobody uses it.**
 
 Two things that are always true and cause most of the trouble:
 
