@@ -17,8 +17,15 @@ summary: One or two lines on what this is and who needs it.
 # revised: 2026-08
 # theme: eos
 # related: [some-id, another-id]
+# xref: [peer-site:their-page-id]
 # source: https://where-the-facts-came-from
-# also_known_as: [genie, personnel lift, MEWP]
+# keywords: [genie, personnel lift, MEWP, LX]
+
+# CONDITIONAL - data tables. The slot NAME must be legal for the type above.
+# data:
+#   schedule:                   # reference: schedule survey inventory_table
+#     file: circuit-schedule.tsv#            revision_log catalog
+#     caption: Circuit schedule # optional
 
 # CONDITIONAL - routers. All four are one feature.
 # router: [staff, pm]           # engine tables. LIST, never a repeated key
@@ -44,6 +51,14 @@ summary: One or two lines on what this is and who needs it.
      is now `summary:` above. A paragraph there renders as ordinary body text
      under the real lede, usually saying the same thing twice, and the build
      reports it.
+
+     ⚠️ IF A VALUE IS NOT NEEDED AWAY FROM THIS PAGE, IT IS NOT A HEADER KEY.
+     Write it in the body, or put it in a TSV. A dozen fields were removed on
+     2026-08-03 for failing that test.
+
+     ⚠️ `also_known_as` WAS RENAMED TO `keywords` (2026-08-04). The old key is
+     valid YAML, so it parses, gets ignored, and silently does nothing. The
+     build names every page still using it.
 
      A page that ships carrying `Section heading`, `Revised Month Year`, or a
      stray commented-out key is the first thing an audit finds.
