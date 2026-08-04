@@ -5,12 +5,10 @@ type: page
 status: public
 order: 5
 revised: 2026-08
+summary: The markdown that does something beyond plain prose - callouts, department tabs, tables, and the one indentation rule that causes most of the trouble.
 ---
 
 # Writing a page
-
-The markdown that does something beyond plain prose: callouts, department tabs,
-tables, and the one indentation rule that causes most of the trouble.
 
 ## Where this syntax actually comes from
 
@@ -159,12 +157,31 @@ than copying it a fourth time.
 
 1. **Four-space indent** for callout and tab bodies. Most reported "formatting
    bugs" are this.
+
 2. **Blank line between every block.** Paragraphs, lists, headings, tables,
-   callouts. Markdown is whitespace-sensitive in ways that are easy to forget.
-3. **The first paragraph is the lede.** It renders large and light, and it is
-   also what a search result shows. One or two lines. Do not try to make it big
-   yourself.
-4. **One H1 per page**, matching the title. Everything else is `##` or deeper.
+   callouts.
+
+    ⚠️ **GitHub's preview is more forgiving than this site, and that is a trap
+    rather than a convenience.** GitHub-Flavoured Markdown lets a list
+    interrupt a paragraph; Python-Markdown, which builds this site, does not.
+    So a list with no blank line above it renders perfectly in the preview and
+    arrives here as one run-on paragraph. The preview is not evidence about
+    the render.
+
+3. **The lede is `summary:` in the frontmatter, not a paragraph you type.**
+
+    ⚠️ **This changed on 2026-08-03 and it used to say the opposite.** The
+    first paragraph under the H1 WAS the lede: it rendered large and light and
+    it was what a search result showed. It is a field now, and a paragraph
+    left under the H1 is reported by the build. See
+    [Frontmatter](@frontmatter).
+
+4. **One H1 per page, and it must match `title:`.** Everything else is `##` or
+   deeper. The two are separate strings that nothing reconciles for you: the
+   sidebar, the browser tab, the search-result heading and `doc-index.json`
+   all follow the FIELD, so a page whose H1 disagrees is called two different
+   things depending on where you meet it.
+
 5. **Do not paste raw HTML** to force a look. If a thing needs to look
    different, it needs a stylesheet change in the engine, and that fix helps
    every site instead of one paragraph.
