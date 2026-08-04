@@ -131,11 +131,12 @@ everything except the one you are looking at. And anything inside a tab is
 invisible to a reader who never clicks it, so nothing safety-critical goes in
 one.
 
-## Tables you write by hand
+## Tables
 
-For comparisons. Note the contrast with the grey spec table at the top of a
-venue or space page: **that one is generated from frontmatter by the page's
-type** and you never write it. See [Frontmatter](@frontmatter).
+Write them by hand. Nothing generates a table from frontmatter any more -- the
+type-drawn spec table was removed on 2026-08-03 along with the fields that fed
+it, because a capacity or a grid height is a fact about the subject and belongs
+in the document, not in its header. See [Frontmatter](@frontmatter).
 
 ```markdown
 | Position | Seats lost | Notes |
@@ -149,9 +150,12 @@ type** and you never write it. See [Frontmatter](@frontmatter).
 | Row H centre | 6 | Standard FOH |
 | Rear house | 0 | Sight line is poor |
 
-If a hand-written table starts appearing on page after page with the same
-columns, that is the signal it wants to be a **type** instead. Say so rather
-than copying it a fourth time.
+**When a hand-written table gets big, it wants to be a data file.** Not a type.
+A hundred rows of dimmer circuits is unreadable as markdown and unmaintainable
+by anybody without a text editor open. Put it in a TSV beside the page, declare
+it with `data:`, and place it with a `<!-- dr:table -->` marker: it stays
+editable in a spreadsheet, diffable in git, and the reader gets a download link
+to the exact file it was drawn from.
 
 ## The rules that prevent most surprises
 
@@ -182,12 +186,16 @@ than copying it a fourth time.
    all follow the FIELD, so a page whose H1 disagrees is called two different
    things depending on where you meet it.
 
-5. **Do not paste raw HTML** to force a look. If a thing needs to look
+5. **Facts about the subject go in the body.** A capacity, an address, an
+   owner, a phone number. There is no header field for any of them, and adding
+   one back is the mistake that was just undone.
+
+6. **Do not paste raw HTML** to force a look. If a thing needs to look
    different, it needs a stylesheet change in the engine, and that fix helps
    every site instead of one paragraph.
 
 ## Related
 
-- [Frontmatter](@frontmatter) -- the block at the top, and generated tables
+- [Frontmatter](@frontmatter) -- the block at the top, and what may go in it
 - [Links](@links) -- `@id` links and cross-site references
 - [Publication states](@publication) -- who can see it

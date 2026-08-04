@@ -18,40 +18,90 @@ id: main-stage          # IDENTITY. Permanent. Set once, never change.
 title: Main Stage       # what humans see
 type: space             # WHICH KIND OF THING this page is
 status: public          # hidden | unlisted | gated | public
-summary: The 500-seat proscenium house, and what it takes to work in it.
+summary: The 480-seat proscenium house, and what it takes to work in it.
 parent: example-house   # the id of its container, never a path
 order: 10               # sidebar weight. Absent sorts alphabetically.
 indexed: false          # keep out of the parent index page's contents list
 theme: utility          # optional skin override
 related: [studio]       # ids
 also_known_as: [the big house]   # other names, rendered visibly at the foot
+data: [circuits.tsv]    # data files beside this page, drawn as tables
 revised: 2026-08        # when this was last true
 ---
 ```
 
-## The five classes of field
+That is the whole vocabulary. **There is no field for a fact about the thing
+the page is about** -- no capacity, no address, no owner, no phone number. See
+the rule below; it is the most important thing on this page.
+
+## ⭐ The rule: away from the page
+
+> **A value belongs in frontmatter if, and only if, it is needed AWAY from the
+> page it appears on.**
+
+That is the entire test, and every field above passes it:
+
+| Field | Where it is needed away from the page |
+| --- | --- |
+| `id` | every inbound link, from this site and from sibling sites |
+| `title` | the sidebar, the browser tab, search results, `doc-index.json` |
+| `status` | whether the page is built at all |
+| `summary` | the search result, where the page's own body is not shown |
+| `order` | the sidebar's sort |
+| `type`, `parent` | what kind of thing this is, published as data |
+| `also_known_as` | words a searcher uses that the page does not |
+
+A room's grid height fails it. So does an address, a capacity, a phone number,
+an owner's name. Those are read in exactly one place -- **on the page** -- so
+they are prose, and putting them in the header only hides them from the reader
+while pretending to be structure.
+
+!!! note "Seventeen fields were removed on 2026-08-03 for failing this test"
+
+    `space` had capacity, dimensions, grid_height, power, seating and rigging.
+    `venue` had address, city, operator, access_notes. `standard` had
+    applies_to, authority, review_cycle. `procedure` had owner, frequency,
+    trigger, systems. `reference` had maintainer, updated_by.
+
+    Each type drew its set into a grey table at the top of the page, and two
+    of them printed a *"Not documented yet"* box naming the ones a page had
+    left out.
+
+    The evidence that settled it: across the whole URITP site, **not one of the
+    four `space` pages ever filled in a single one of the six fields.** The
+    table rendered nothing and the callout nagged four pages for values nobody
+    intended to put in a header. A field set that goes a year unpopulated is
+    not waiting for content.
+
+    Michael, ruling on it: *"they're slop and not real metadata."*
+
+**Where those facts go instead.** In a sentence, if there are a few of them. In
+a TSV beside the page, declared with `data:` and placed with a
+`<!-- dr:table -->` marker, if there are enough to want a grid. The engine had
+already made this call for the data files: *a table of dimmer circuits is not
+machinery, it IS the documentation.* A grid height is the same kind of thing.
+
+## The four classes of field
 
 **Identity** (`id`, `title`). `id` is a promise. Moving the file, renaming its
 folder or retitling the page cannot break an inbound link, because none of
 those is what a link points at. That promise only holds if the id never
 changes.
 
-**Classification** (`type`, `parent`). `type` is the interesting one: it says
-what kind of thing this page *is*, which is what lets the renderer decide how
-to draw it. `parent` is an id, which turns a flat pile of files into a graph.
+**Classification** (`type`, `parent`). What kind of thing this page is, and
+what contains it.
 
-**Render flags** (`status`, `order`, `indexed`, `theme`). The only fields whose
-job is purely presentational or gating.
+**Render flags** (`status`, `order`, `indexed`, `theme`, `contents`, `data`).
+Instructions to the build.
 
 **Provenance** (`revised`, `source`). Who to believe, and when it was last
 true.
 
-**Content** (`summary`, `also_known_as`). The odd ones out, and worth naming as
-their own class: everything above is an instruction to the machine, and these
-two are text a reader reads. They are up here rather than in the body because
-both are needed *away* from the page -- in a search result, in a sidebar
-preview, in another site's index -- and a fact that has to travel cannot live
-in the prose.
+`summary` and `also_known_as` are the two that are genuinely text a reader
+reads, which makes them look like a fifth class. **They are not a licence for
+more.** Both are up here for the same narrow reason: each is needed somewhere
+the page's body is not available. Anything that does not clear that bar is
+prose.
 
 ## Required, always
 
@@ -97,23 +147,32 @@ Use it for jargon that differs from house vocabulary, not for stuffing. The
 search already indexes the entire body of every page; this is only for words
 that are genuinely absent from it.
 
-## Types add their own requirements
-
-Each type declares what it needs. A `space` requires `parent`, because a room
-that does not say which building it is in is a fact with nowhere to live.
+## Types
 
 | Type | Requires | Draws |
 | --- | --- | --- |
-| `page` | the base four | nothing extra |
+| `page` | the base four | nothing |
 | `index` | the base four | the section contents, at the foot |
-| `venue` | the base four | address, city, operator |
-| `space` | `parent` | capacity, dimensions, grid height, power, seating, rigging |
-| `standard` | the base four | applies to, authority, review cycle |
-| `procedure` | the base four | owner, frequency, trigger, systems |
-| `reference` | the base four | maintainer |
+| `venue` | the base four | nothing |
+| `space` | `parent` | nothing |
+| `standard` | the base four | nothing |
+| `procedure` | the base four | nothing |
+| `reference` | the base four | nothing |
 
 An undeclared type falls back to `page` and is reported. It does not break the
 build.
+
+!!! warning "Only `index` still draws anything, and that is an open question"
+
+    Since the field removal, five of the seven types are `page` with a
+    different label. A type earns its existence by having fields or a way of
+    drawing, and these currently have neither.
+
+    They are kept for now because a `type` is still published in
+    `doc-index.json`, so it says something true about a page to anything
+    reading these docs as data -- and because retiring one would make every
+    page using it report an undeclared type. Whether that is enough to justify
+    five names is not settled.
 
 ## `index` is about POSITION, not subject
 
@@ -206,10 +265,3 @@ section's front door. If you want it gone from the sidebar too, that is
 
     A page with `indexed: false` is still listed in the sidebar, still
     searchable, still linkable from anywhere, and still a public URL.
-
-## Why the tables are generated
-
-Because a table typed by hand is a table that drifts. Thirty spaces written by
-hand over two years produce thirty slightly different tables, and none of them
-can be compared to any other. Declaring the fields once means adding a field to
-every space in the family is one line in one file.

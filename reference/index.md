@@ -4,13 +4,13 @@ title: Reference
 type: reference
 status: public
 order: 0
-maintainer: Site owner
+summary: Pages that get looked up rather than read - the glossary for this family of sites.
 revised: 2026-08
 ---
 
 # Reference
 
-Pages that get looked up rather than read.
+Maintained by the site owner.
 
 ## Glossary
 
@@ -25,9 +25,20 @@ URL, content repo, palette, section order. Adding a site means adding an
 instance, not forking anything.
 
 **Type** -- what kind of thing a page is. Declared in frontmatter, defined in
-the engine, and responsible for drawing the page's generated table.
+the engine.
+
+**Lede** -- the one or two lines under the title. It is the `summary:` field,
+not a paragraph you type, and it is what a search result shows.
 
 **Peer** -- another site in the family, linkable with `@slug:page-id`.
+
+**Marker** -- an inline note on how much to trust one value, like
+[to be confirmed]{.tbc}. It sits inside the sentence, so the doubt attaches to
+the figure rather than the paragraph.
+
+**Data file** -- a TSV beside a page, declared with `data:` and placed with a
+`<!-- dr:table -->` marker. Where a grid of facts lives now that no type draws
+one from frontmatter.
 
 **doc-index.json** -- published at the root of every site, listing its page
 ids. This is the file that makes cross-site links possible, which makes it the

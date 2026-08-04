@@ -38,6 +38,7 @@ theme: eos
 related: [some-id, another-id]
 source: https://where-the-facts-came-from
 also_known_as: [genie, personnel lift, MEWP]   # renders visibly at the foot
+data: [circuits.tsv]            # TSVs beside this page, placed with a marker
 
 # CONDITIONAL - routers. All four are one feature; see the guide.
 router: [staff, pm]             # engine tables. LIST, never a repeated key
@@ -55,7 +56,9 @@ indexed: false                  # keep THIS page out of its parent's list
 ## First real section
 ```
 
-The four kinds of field, and why the tables under them are generated, are in
+**That is every field there is.** There is deliberately no key for a fact about
+the subject -- no capacity, no address, no owner. The rule that decides what
+may be added, and the seventeen fields removed for failing it, are in
 [Frontmatter](@frontmatter). Do not re-derive them here.
 
 ## Body shape
@@ -65,9 +68,9 @@ and sits in this order:
 
 | Order | Section | Rule |
 | --- | --- | --- |
-| 1 | `# Title` | Exactly one H1. **No paragraph under it** -- that is `summary:` |
-| 2 | *generated* | The lede, then any spec table. Do not type either |
-| 3 | Body `##` sections | Whatever the page is for |
+| 1 | `# Title` | Exactly one H1, matching `title:` |
+| 2 | *generated* | The lede, from `summary:`. Do not type it |
+| 3 | Body `##` sections | Whatever the page is for, including its facts |
 | 4 | `## Related` | Last section. Bare list of `@id` links, one line each |
 | 5 | *generated* | An index page's contents list, then the aka line |
 
@@ -80,28 +83,33 @@ Two things that are always true and cause most of the trouble:
 
 ## Audit checklist
 
-Ten questions per file. Anything that fails is in the build report by name, so
-the report is the fast version of this list.
+Eleven questions per file. Anything that fails is in the build report by name,
+so the report is the fast version of this list.
 
 1. `id`, `title`, `status`, `summary` all present? A page missing `status` **is
    not built**; a page missing `summary` has no text in its search result.
 2. Is the lede in `summary:` and NOT also sitting as a paragraph under the H1?
    Both is worse than either -- the page says the same thing twice, once large
    and once normal.
-3. Is `id` kebab-case, and unchanged since it shipped?
-4. Any key written **twice**? YAML keeps the last one silently. This is the
+3. Does the H1 match `title:`? Nothing reconciles them for you, so a page that
+   disagrees is called two different things depending on where you meet it.
+4. Is `id` kebab-case, and unchanged since it shipped?
+5. Any key written **twice**? YAML keeps the last one silently. This is the
    single nastiest failure available here.
-5. Does `type` match what the page is *about* -- not where the file sits? An
+6. **Any key holding a FACT ABOUT THE SUBJECT?** A capacity, an address, a
+   phone number, an owner. It does not belong in the header, no matter how
+   tidy it looks there. It is unread by everything and invisible to readers.
+7. Does `type` match what the page is *about* -- not where the file sits? An
    `index.md` that is a building is a `venue`. See [Frontmatter](@frontmatter).
-6. `space` pages: is `parent` set, and is it an **id**?
-7. Every internal link an `@id`, never a path or an `https://` to our own site?
+8. `space` pages: is `parent` set, and is it an **id**?
+9. Every internal link an `@id`, never a path or an `https://` to our own site?
    See [Links](@links).
-8. `order:` an unquoted integer **with no leading zero**? `"10"` and `1.5` both
-   sort as absent. So does `08`: YAML reads a leading zero as octal, `08` is
-   not valid octal, and it silently becomes the string `"08"`. `01` through
-   `07` work by accident, which is what makes the habit dangerous.
-9. Uncertain values carrying a [marker](@markers) rather than a bare TBD?
-10. Any of the dead keys below still in the header?
+10. `order:` an unquoted integer **with no leading zero**? `"10"` and `1.5`
+    both sort as absent. So does `08`: YAML reads a leading zero as octal, `08`
+    is not valid octal, and it silently becomes the string `"08"`. `01`
+    through `07` work by accident, which is what makes the habit dangerous.
+11. Uncertain values carrying a [marker](@markers) rather than a bare TBD, and
+    no dead keys from the table below still in the header?
 
 ## Keys that look real and do nothing
 
@@ -114,9 +122,21 @@ indistinguishable from the feature being broken.
 | `gate:` | Nothing. It was never implemented. Use `router:` |
 | `listed:` | `indexed:` |
 | `keywords:` | `also_known_as:` |
+| `capacity:` `dimensions:` `grid_height:` `power:` `seating:` `rigging:` | Write them in the body, or a TSV via `data:` |
+| `address:` `city:` `operator:` `access_notes:` | Same. Body or data file |
+| `owner:` `frequency:` `trigger:` `systems:` | Same |
+| `applies_to:` `authority:` `review_cycle:` | Same |
+| `maintainer:` `updated_by:` | Same |
 | `hide:` / `nav:` | Nothing. `status: unlisted` removes a page from the sidebar |
 | `search:` | Nothing. `status: unlisted` removes a page from search |
 | `parent:` on a non-`space` | Nothing. Use `related:` |
+
+!!! note "The seventeen removed fields are listed individually on purpose"
+
+    They were real until 2026-08-03 and pages in this family still carry them.
+    A retired key parses as valid YAML and is silently ignored, which looks
+    exactly like the feature being broken -- so each one stays named here until
+    nobody is using it.
 
 !!! danger "`status: gated` is not a gate"
     It is **not implemented**. A page declaring it is published as `unlisted`
