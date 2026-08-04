@@ -5,12 +5,10 @@ type: page
 status: public
 order: 1
 revised: 2026-08
+summary: How to read a site in this family, and what the small visual signals on a page actually mean.
 ---
 
 # Using these docs
-
-How to read a site in this family, and what the small visual signals on a page
-actually mean.
 
 ## The footer stamp is the honest signal
 
@@ -22,25 +20,40 @@ changing. If you pushed an edit and the footer stamp is not your change, **the
 build failed** -- the page you are reading is stale, and nothing on the site is
 going to update until it is fixed.
 
-## Spec tables are generated, not typed
+## The first line under a title is the summary
 
-The grey field table near the top of a venue or space page is drawn by the
-page's declared **type**, not written by the author. Every space in the family
-gets the same fields in the same order.
+It renders larger and lighter than the body, and it is also the text you see
+under a page's name in a search result. If a search result has a title and no
+text beneath it, that page has not been given one.
 
-This is why they can be trusted to be comparable, and why a field that is
-missing on one page is genuinely missing rather than just formatted
-differently.
+## Marked values tell you how much to trust them
 
-## "Not documented yet" means exactly that
+Facts on these pages are written in the prose, not in a generated table, and
+where a value is uncertain it says so **inside the sentence**:
 
-When a page shows a *Not documented yet* note naming some fields, it is saying
-those facts have not been recorded. It is **not** saying the thing does not
-exist.
+- **To be confirmed** -- written down, not checked against a source
+- **Verify on site** -- recorded once, never re-checked. Measure before you
+  build to it
+- **Not recorded** -- this fact should exist and does not. The absence is
+  known, not overlooked
+- **Confirmed** -- checked against the real thing
+- **~Estimate** -- close enough to plan with, not to cut to
+- ~~Superseded~~ -- the old value, kept so older paperwork still matches up
 
-A space with no grid height used to look identical to a space with no grid.
-Saying it out loud turns a silent gap into a visible one, which is the only way
-a gap ever gets filled.
+Hover any of them on the live site for the same explanation.
+
+**"Not recorded" is the one worth understanding.** A missing fact and a fact
+that does not exist look identical, and a reader will draw the wrong conclusion
+and never know they did. A room with no recorded grid height reads exactly like
+a room with no grid. Marking the gap is what makes it fixable.
+
+!!! note "This section used to describe a generated table"
+
+    Until 2026-08-03, venue and space pages carried a grey field table drawn
+    automatically from the page's header, plus a *"Not documented yet"* box
+    naming anything left blank. Both were removed: the facts they held belong
+    in the document, not in its metadata. If you remember those and cannot find
+    them, that is why.
 
 ## Struck-through links are broken
 

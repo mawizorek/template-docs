@@ -5,13 +5,13 @@ type: index
 status: public
 order: 0
 revised: 2026-08
+summary: The working reference for how every site in this family is written, rendered and published.
 ---
 
 # Doc Family Template
 
-The working reference for how every site in this family is written, rendered
-and published. Every page here is both an explanation and a live example of the
-thing it explains.
+Every page here is both an explanation and a live example of the thing it
+explains.
 
 ## Start here
 
@@ -26,10 +26,10 @@ This site is the thing you copy.
 
 | Section | What it proves |
 | --- | --- |
-| [Authoring](@authoring) | The frontmatter contract, links, publication states |
-| [Venues](@venues) | The `venue` and `space` types, parent chains, generated spec tables |
+| [Authoring](@authoring) | The frontmatter contract, links, markers, publication states |
+| [Venues](@venues) | The `venue` and `space` types, and the `parent` chain between them |
 | [Standards](@standards) | The `standard` and `procedure` types, including a page with no theatre in it |
-| [Reference](@reference) | The `reference` type |
+| [Reference](@reference) | The `reference` type, and the family glossary |
 
 ## The rule everything else follows from
 
@@ -40,3 +40,7 @@ website lives in a separate engine repository.
 The reason is the green **Download ZIP** button. A content repo that is purely
 content can be handed to somebody, archived, printed, or imported somewhere
 else without anyone having to explain which folders to ignore.
+
+The same instinct governs what may go in a page's header: only what is needed
+**away** from the page. Everything else is the document. See
+[Frontmatter](@frontmatter).
