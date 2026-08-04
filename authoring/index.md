@@ -39,7 +39,7 @@ Start every new page at `status: hidden`. Promote it when it is worth reading.
 
 Then [publish](@publishing) -- saving the file does not put it on the site.
 
-## The four rules that actually matter
+## The rules that actually matter
 
 1. **Every page needs `status` and `summary`.** No status, no build -- that is
    deliberate, so nothing reaches the public web because somebody forgot a
@@ -54,11 +54,13 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
 ## Start here
 
 - [The gold standard](@audit) -- the whole frontmatter block in one copyable
-  piece, ordered required to conditional, plus an eleven-question audit
-  checklist and the list of keys that look real and do nothing
+  piece, ordered required to conditional, plus the audit checklist and the list
+  of keys that look real and do nothing
 
 ## Writing
 
+- [How this works](@how-this-works) -- where documents, machinery and config
+  each live, and the two questions that decide where a new thing goes
 - [Frontmatter](@frontmatter) -- every field, what it does, which are required,
   and the rule that decides whether a new one may exist at all
 - [Writing a page](@writing) -- callouts, department tabs, tables, and the
