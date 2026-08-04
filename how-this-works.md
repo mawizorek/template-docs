@@ -12,7 +12,7 @@ also_known_as: [architecture, the layer map, where does this go]
 # How this works
 
 You do not need this page to write a page. You need it the moment you are
-holding something and cannot tell which of six places it belongs in.
+holding something and cannot tell which layer it belongs in.
 
 ## Two repositories, and the arrow only points one way
 
@@ -73,9 +73,9 @@ filename, it does not have to.
 One module per concern: types, the lede, links, visibility, routers, data
 tables, the revision log, markers, the published index, the size budget, the
 theme, the site identity, the nav, the page foot, the build stamp, assets, plus
-two shared helpers everything else imports.
+the shared helpers everything else imports.
 
-One of them is imported by **two** hooks. `status:` is a single decision, but the
+One module is imported by **two** hooks. `status:` is a single decision, but the
 renderer forces it in two passes -- every hook's file stage runs before any
 hook's nav stage -- so *built* and *listed* cannot be settled together. The
 concept stays in one module; only the order is split.
@@ -92,9 +92,9 @@ holding facts about a subject. See [Frontmatter](@frontmatter).
 
 ### `theme/` and `instances/` are data
 
-Five shared tables -- colours, typography, contrast, theme names, markers --
-read by every site in the family. Adding a marker or a colour is a row, not a
-code change.
+Shared tables -- colours, typography, contrast, theme names, markers -- read by
+every site in the family. Adding a marker or a colour is a row, not a code
+change.
 
 Then one folder per site, holding the three things that make a build *this*
 site: its name and URL and peers, its own stylesheet layer, its router table.
@@ -156,7 +156,28 @@ tool on this site.
 A thing that seems to need two of those usually wants splitting, and a thing
 that fits none of them is usually content.
 
-## Two rules that explain most of the surprises
+!!! note "Why this page counts nothing"
+
+    It had numbers in it for about three hours: fifteen hooks, seventeen
+    modules, eight declarations, four sites. Every one was true when it was
+    written and every one would have been wrong on the next commit that added
+    a file.
+
+    A hand-written count of a thing that grows is the purest form of rot.
+    Nothing checks it, it fails silently, and it stays authoritative the whole
+    way down. **The folder is the count**, and the folder is right by
+    construction.
+
+    The replacements are not vaguer. *One module per concern* is the actual
+    rule; *seventeen* was a snapshot of that rule being obeyed once.
+
+    Two kinds of number survive that test. A count of what **happened** --
+    *seventeen fields were removed* -- is history and cannot rot. A count that
+    describes one mechanism -- *imported by two hooks* -- is a design fact, not
+    an inventory. A count of what **exists** is neither, and it changes
+    tomorrow.
+
+## The rules that explain most of the surprises
 
 **Saving is not publishing.** A content repo holds no build workflow of its own
 -- that is the purity rule -- so committing a file does nothing to the live site
