@@ -12,7 +12,7 @@ also_known_as: [architecture, the layer map, where does this go]
 # How this works
 
 You do not need this page to write a page. You need it the moment you are
-holding something and cannot tell which of six places it belongs in.
+holding something and cannot tell which layer it belongs in.
 
 ## Two repositories, and the arrow only points one way
 
@@ -38,12 +38,12 @@ answering it.
 
 | Layer | Answers | Shape |
 | --- | --- | --- |
-| `hooks/` | **WHEN** things happen | fifteen two-line files |
-| `docrender/` | **WHAT** happens | seventeen Python modules |
-| `objects/` | **WHAT A PAGE IS** | eight small YAML declarations |
+| `hooks/` | **WHEN** things happen | one two-line file per stage, in the order they run |
+| `docrender/` | **WHAT** happens | one Python module per concern |
+| `objects/` | **WHAT A PAGE IS** | a base declaration, plus one per type |
 | `theme/` + `instances/` | **WHAT IT LOOKS LIKE**, and which site this is | TSV tables and per-site config |
 
-### `hooks/` is order and nothing else
+## `hooks/` is order and nothing else
 
 Every file in it is two lines. In full:
 
@@ -61,19 +61,19 @@ link resolves cleanly to a URL that 404s for every reader. Written as a warning
 paragraph, that constraint survives until somebody reorders a list. Written as a
 filename, it does not have to.
 
-### `docrender/` is the code
+## `docrender/` is the code
 
 One module per concern: types, the lede, links, visibility, routers, data
 tables, markers, the published index, the size budget, the theme, the site
-identity, the nav, the page foot, the build stamp, assets, plus two shared
+identity, the nav, the page foot, the build stamp, assets, plus the shared
 helpers everything else imports.
 
-One of them is imported by **two** hooks. `status:` is a single decision, but the
+One module is imported by **two** hooks. `status:` is a single decision, but the
 renderer forces it in two passes -- every hook's file stage runs before any
 hook's nav stage -- so *built* and *listed* cannot be settled together. The
 concept stays in one module; only the order is split.
 
-### `objects/` says what a kind of page is
+## `objects/` says what a kind of page is
 
 A base declaration plus one file per type. The base requires `id`, `title`,
 `status` and `summary`. A `space` adds `parent`. **Nothing else requires
@@ -83,21 +83,21 @@ section landing page.
 It was more than that until 2026-08-03, when seventeen fields were removed for
 holding facts about a subject. See [Frontmatter](@frontmatter).
 
-### `theme/` and `instances/` are data
+## `theme/` and `instances/` are data
 
-Five shared tables -- colours, typography, contrast, theme names, markers --
-read by every site in the family. Adding a marker or a colour is a row, not a
-code change.
+Shared tables -- colours, typography, contrast, theme names, markers -- read by
+every site in the family. Adding a marker or a colour is a row, not a code
+change.
 
 Then one folder per site, holding the three things that make a build *this*
 site: its name and URL and peers, its own stylesheet layer, its router table.
-**Four sites exist today**, and one of them has no theatre in it at all, which
-is the portability claim being tested rather than asserted.
+More than one site exists, and at least one of them has no theatre in it at
+all, which is the portability claim being tested rather than asserted.
 
 ## What is inline, in your markdown
 
-Five pieces of syntax do something beyond plain prose. Every one degrades
-gracefully: a page still reads as a document in a plain markdown viewer.
+These do something beyond plain prose. Every one degrades gracefully: a page
+still reads as a document in a plain markdown viewer.
 
 | You write | It becomes |
 | --- | --- |
@@ -146,6 +146,25 @@ tool on this site.
 
 A thing that seems to need two of those usually wants splitting, and a thing
 that fits none of them is usually content.
+
+!!! note "Why this page counts nothing"
+
+    There were numbers here for about three hours: fifteen hooks, seventeen
+    modules, eight declarations, four sites. Every one was correct when it was
+    written and every one would have been wrong on the next commit that added a
+    file.
+
+    A hand-written count of a thing that grows is the purest form of rot. It
+    cannot be checked by anything, it fails silently, and it stays authoritative
+    the whole way down. **The folder is the count**, and it is right by
+    construction.
+
+    Note that the replacements are not vaguer. *One module per concern* is the
+    actual rule; *seventeen* was only a snapshot of that rule being obeyed once.
+
+    The one number kept is *seventeen fields were removed*, because that is
+    history rather than inventory: a count of what HAPPENED does not change, a
+    count of what EXISTS changes tomorrow.
 
 ## Related
 
