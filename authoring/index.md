@@ -5,11 +5,10 @@ type: index
 status: public
 order: 0
 revised: 2026-08
+summary: Everything you need to write a page and get it published.
 ---
 
 # Authoring
-
-Everything you need to write a page and get it published.
 
 ## The ninety-second version
 
@@ -23,35 +22,45 @@ id: rehearsal-studio
 title: Rehearsal Studio
 type: space
 status: hidden
+summary: The second-floor rehearsal room, and what it can and cannot hold.
 parent: example-house
 ---
 
 # Rehearsal Studio
 
-One sentence on what this is and who needs it.
+## What is in it
 ```
+
+Note what is **not** there: no paragraph under the H1. That used to be the
+lede and it is now `summary:`. Note also that nothing in the header describes
+the room -- no capacity, no dimensions. Those go in the body.
 
 Start every new page at `status: hidden`. Promote it when it is worth reading.
 
 Then [publish](@publishing) -- saving the file does not put it on the site.
 
-## The three rules that actually matter
+## The four rules that actually matter
 
-1. **Every page needs `status`.** No status, no build. That is deliberate:
-   nothing reaches the public web because somebody forgot a line.
+1. **Every page needs `status` and `summary`.** No status, no build -- that is
+   deliberate, so nothing reaches the public web because somebody forgot a
+   line. No summary, and the page appears in search with nothing under its
+   name.
 2. **Never change an `id`.** Other pages link to that string, including pages
    on other sites. Changing it breaks them silently.
 3. **Link to ids, never to file paths.** See [Links](@links).
+4. **Facts about the subject go in the body**, never in the header. There is no
+   field for a capacity or an address, and that is on purpose.
 
 ## Start here
 
 - [The gold standard](@audit) -- the whole frontmatter block in one copyable
-  piece, ordered required to conditional, plus a nine-question audit checklist
-  and the list of keys that look real and do nothing
+  piece, ordered required to conditional, plus an eleven-question audit
+  checklist and the list of keys that look real and do nothing
 
 ## Writing
 
-- [Frontmatter](@frontmatter) -- every field, what it does, which are required
+- [Frontmatter](@frontmatter) -- every field, what it does, which are required,
+  and the rule that decides whether a new one may exist at all
 - [Writing a page](@writing) -- callouts, department tabs, tables, and the
   four-space indent rule that causes most formatting trouble
 - [Links](@links) -- `@id`, headings, and cross-site references
