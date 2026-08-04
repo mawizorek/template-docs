@@ -5,24 +5,29 @@ type: space
 status: public
 parent: example-house
 order: 10
-capacity: 480
-dimensions: 12.2m x 9.1m playing area
-grid_height: 7.6m
-power: 2 x 200A three-phase company switch, stage left
-seating: Fixed rake, 480 seats, 6 accessible positions
-rigging: 24 single-purchase counterweight line sets at 200mm centres
+summary: The 480-seat proscenium house at Example House, and what it takes to work in it.
 revised: 2026-08
 ---
 
 # Main Stage
 
-The fully populated example: every field the `space` type knows about is filled
-in, so this is what a complete page looks like.
+The playing area is 12.2m x 9.1m with the grid at 7.6m. Seating is a fixed rake
+of 480, including six accessible positions. Power is two 200A three-phase
+company switches, stage left. Rigging is 24 single-purchase counterweight line
+sets at 200mm centres.
 
-The table above was not typed. It is drawn from frontmatter by the type
-declaration, which is why it will look identical on every space in every site
-in the family, and why adding a new field to all of them is one line in one
-file rather than an editing session.
+!!! note "This page used to be a demonstration"
+
+    Every fact above was frontmatter until 2026-08-03, drawn into a grey table
+    by the `space` type. The fields were removed because they are facts about a
+    ROOM: nothing but this page ever read them, so they were prose in a header.
+
+    The rule that replaced them: a value belongs in frontmatter only if it is
+    needed **away** from the page. A title is, because the sidebar and every
+    search result need it. A grid height is not.
+
+    When there are enough numbers to want a grid, they go in a TSV beside the
+    page and are drawn with `data:`. See [Frontmatter](@frontmatter).
 
 ## Venue notes {#venue-notes}
 
