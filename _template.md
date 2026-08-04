@@ -2,7 +2,9 @@
 id: template
 title: Page template
 type: page
-status: hidden
+status: public
+order: 5
+revised: 2026-08
 ---
 
 # Page template
