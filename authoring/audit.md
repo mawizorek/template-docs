@@ -37,7 +37,7 @@ revised: 2026-08
 theme: eos
 related: [some-id, another-id]
 source: https://where-the-facts-came-from
-also_known_as: [genie, personnel lift, MEWP]   # renders visibly at the foot
+keywords: [genie, personnel lift, MEWP]   # renders visibly at the foot
 data: [circuits.tsv]            # TSVs beside this page, placed with a marker
 
 # CONDITIONAL - routers. All four are one feature; see the guide.
@@ -49,6 +49,9 @@ router_inherit: false           # only if a parent folder declares a router
 # CONDITIONAL - index lists. Opposite ends of one relationship.
 contents: auto                  # THIS page lists its children (non-index types)
 indexed: false                  # keep THIS page out of its parent's list
+
+# CONDITIONAL - the sidebar. index.md ONLY, and nowhere else.
+nav: collapse                   # collapse | expand | hide (or the -ed forms)
 ---
 
 # Page Title
@@ -72,7 +75,7 @@ and sits in this order:
 | 2 | *generated* | The lede, from `summary:`. Do not type it |
 | 3 | Body `##` sections | Whatever the page is for, including its facts |
 | 4 | `## Related` | Last section. Bare list of `@id` links, one line each |
-| 5 | *generated* | An index page's contents list, then the aka line |
+| 5 | *generated* | An index page's contents list, then the keywords line |
 
 Two things that are always true and cause most of the trouble:
 
@@ -110,6 +113,8 @@ report is the fast version of this list.
     through `07` work by accident, which is what makes the habit dangerous.
 11. Uncertain values carrying a [marker](@markers) rather than a bare TBD, and
     no dead keys from the table below still in the header?
+12. Any `nav:` on a page that is **not** an `index.md`? It does nothing there
+    and the build says so. See [Frontmatter](@frontmatter).
 
 !!! note "This list does not say how long it is"
 
@@ -132,15 +137,25 @@ indistinguishable from the feature being broken.
 | --- | --- |
 | `gate:` | Nothing. It was never implemented. Use `router:` |
 | `listed:` | `indexed:` |
-| `keywords:` | `also_known_as:` |
+| `also_known_as:` | `keywords:` |
 | `capacity:` `dimensions:` `grid_height:` `power:` `seating:` `rigging:` | Write them in the body, or a TSV via `data:` |
 | `address:` `city:` `operator:` `access_notes:` | Same. Body or data file |
 | `owner:` `frequency:` `trigger:` `systems:` | Same |
 | `applies_to:` `authority:` `review_cycle:` | Same |
 | `maintainer:` `updated_by:` | Same |
-| `hide:` / `nav:` | Nothing. `status: unlisted` removes a page from the sidebar |
+| `hide:` | Nothing. It is a Material page property and this engine ignores it |
 | `search:` | Nothing. `status: unlisted` removes a page from search |
 | `parent:` on a non-`space` | Nothing. Use `related:` |
+
+!!! warning "`nav:` was on this list until 2026-08-05, and it is now REAL"
+
+    It is a live key: it decides what a folder does in the sidebar, on an
+    `index.md` and nowhere else. See [Frontmatter](@frontmatter).
+
+    It is named here rather than quietly removed because this table said
+    *delete on sight* about a working feature for part of a day, and anybody
+    who followed that advice deleted a line that was doing something. A row
+    that disappears teaches nobody why they were wrong.
 
 !!! note "The removed fields are listed individually on purpose"
 
