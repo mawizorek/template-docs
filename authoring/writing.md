@@ -18,15 +18,26 @@ way it does. Three separate layers have to agree:
 | Layer | What it decides | Where it lives |
 | --- | --- | --- |
 | Python-Markdown extensions | whether `!!!` and `===` mean anything at all | the engine's `mkdocs.yml`, under `markdown_extensions` |
-| Material's stylesheet | which callout NAMES have a colour and an icon | the `mkdocs-material` dependency |
-| Our stylesheet | the house look layered on top | the engine's `assets/base.css` |
+| Material's stylesheet | the callout ICONS, and the fallback look for a name nobody has declared | the `mkdocs-material` dependency |
+| Our theme | which callout families exist and what COLOUR each one takes | the engine's `theme/blocks.tsv`, one row per family |
 
 Nothing in this repository defines any of it, which is the whole arrangement:
 content repos hold documents, the engine holds machinery.
 
-The practical consequence is that **a callout type Material does not know still
-renders.** It gets a generic box with your word as its title and no icon. It
-does not error, and nobody notices for a year. So use the three below.
+**Recolouring a callout family is one row in `theme/blocks.tsv`.** It used to be
+a hardcoded hex in Material's own stylesheet, which is why no theme change ever
+reached a callout before 2026-08-05. Ask for the row, not a stylesheet edit.
+
+The other practical consequence is that **a callout type nobody has declared
+still renders.** Python-Markdown matches any word after `!!!` and lowercases it
+straight into a class, with no validation of any kind. It does not error. What
+you get is a box in Material's default colour rather than one of ours, **wearing
+the note pencil** -- because Material's base rule sets that icon unconditionally
+and only a declared family overrides it.
+
+⚠️ **So a mistyped family name does not look broken, it looks like a `note`.**
+That is worse than an obvious failure and it is the reason to stick to the list
+below.
 
 ## Callouts
 
@@ -46,11 +57,45 @@ sitting there in the middle of the page.
     The dock door is 2.4m. Anything taller comes in through the house,
     which costs about an hour.
 
-### Only three, and each means something specific
+⚠️ **An unindented body does not fail loudly either.** It renders as a
+title-only box with your text sitting underneath it as a loose paragraph, which
+reads as a styling bug and is an authoring one.
 
-A fourth type would not break anything, which is exactly why the list is held
-to three. Once there are eight, nobody can tell you what any of them mean and
-they all read as decoration.
+### The thirteen families
+
+Every one of these takes its colour from the site's theme, so they change
+together when the theme does. In the engine's own row order:
+
+| Type | What it means | Colour |
+| --- | --- | --- |
+| `note` | context, a gap, a placeholder | the site's identity colour |
+| `abstract` | a summary or TL;DR at the top of a long page | secondary identity |
+| `info` | an informational aside | blue |
+| `tip` | advice that helps | green |
+| `success` | something worked, or is confirmed | green |
+| `question` | an open question or an FAQ entry | blue |
+| `warning` | proceed carefully | amber |
+| `failure` | something did not work | red |
+| `danger` | a genuine safety stop | red |
+| `bug` | a known defect | red |
+| `example` | a worked example | quiet grey |
+| `quote` | a quotation | quiet grey |
+| `good` | a positive pointer -- *look here for this* | green |
+
+**Six families share three colours, on purpose.** `tip`, `success` and `good`
+are all green; `failure`, `danger` and `bug` are all red. Words that mean the
+same thing to a reader should not be different colours, and **the icon is what
+tells them apart.** If you see two green boxes on a page, nothing is broken.
+
+⚠️ **The list is a house convention, not a constraint.** Nothing validates the
+word you type -- see above. Reach for a fourteenth only when you can say in one
+sentence what it means that none of these does, because a vocabulary nobody can
+recite is decoration.
+
+### The three that carry weight
+
+Most pages need `note`, `warning` and `danger` and nothing else. They are a
+ladder, and the ladder only works if the top rung is rare.
 
 **`note`** -- context, a gap, a placeholder. Something worth knowing that costs
 nothing if you miss it.
@@ -76,10 +121,34 @@ readers to scroll past the one that mattered.
     The traps are decked but not rated. There is no load figure for them
     and nobody has inspected them since installation.
 
+### `good` -- the positive pointer
+
+The newest family, and the only one that is ours rather than inherited. Green,
+with a check. It is for **where a thing is** rather than what to be careful of:
+the useful door, the working outlet, the person who has the key.
+
+```markdown
+!!! good "Look here for First Aid"
+
+    Box Office has a kit behind the counter, and the house manager
+    carries the second one.
+```
+
+!!! good "Look here for First Aid"
+
+    Box Office has a kit behind the counter, and the house manager
+    carries the second one.
+
+**`good` versus `tip` versus `success`.** They share a colour and they are not
+interchangeable: `tip` is advice, `success` is a thing that worked, `good` is a
+location or a resource worth knowing about. If you cannot tell which one you
+want, you want `tip`.
+
 ### Collapsible
 
 `???` instead of `!!!` makes it a disclosure that starts closed. Add a `+` to
-start it open. Good for a long aside that most readers will skip.
+start it open. Good for a long aside that most readers will skip. **Works with
+all thirteen families.**
 
 ```markdown
 ??? note "Full circuit schedule"
