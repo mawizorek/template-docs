@@ -4,6 +4,7 @@ title: Doc Family Template
 type: index
 status: public
 order: 0
+nav: collapsed
 revised: 2026-08
 summary: The working reference for how every site in this family is written, rendered and published.
 ---
@@ -35,6 +36,7 @@ This site is the thing you copy.
 | [Venues](@venues) | The `venue` and `space` types, and the `parent` chain between them |
 | [Standards](@standards) | The `standard` and `procedure` types, including a page with no theatre in it |
 | [Reference](@reference) | The `reference` type, and the family glossary |
+| *this page's header* | `nav:` -- the sidebar you are looking at collapses because this file says so |
 
 ## The rule everything else follows from
 

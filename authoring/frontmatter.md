@@ -22,9 +22,10 @@ summary: The 480-seat proscenium house, and what it takes to work in it.
 parent: example-house   # the id of its container, never a path
 order: 10               # sidebar weight. Absent sorts alphabetically.
 indexed: false          # keep out of the parent index page's contents list
+nav: collapse           # index.md ONLY. What this FOLDER does in the sidebar.
 theme: utility          # optional skin override
 related: [studio]       # ids
-also_known_as: [the big house]   # other names, rendered visibly at the foot
+keywords: [the big house]        # other names and search words, shown at the foot
 data: [circuits.tsv]    # data files beside this page, drawn as tables
 revised: 2026-08        # when this was last true
 ---
@@ -48,8 +49,9 @@ That is the entire test, and every field above passes it:
 | `status` | whether the page is built at all |
 | `summary` | the search result, where the page's own body is not shown |
 | `order` | the sidebar's sort |
+| `nav` | the sidebar, on every page of the site, not just this one |
 | `type`, `parent` | what kind of thing this is, published as data |
-| `also_known_as` | words a searcher uses that the page does not |
+| `keywords` | words a searcher uses that the page does not |
 
 A room's grid height fails it. So does an address, a capacity, a phone number,
 an owner's name. Those are read in exactly one place -- **on the page** -- so
@@ -91,17 +93,16 @@ changes.
 **Classification** (`type`, `parent`). What kind of thing this page is, and
 what contains it.
 
-**Render flags** (`status`, `order`, `indexed`, `theme`, `contents`, `data`).
-Instructions to the build.
+**Render flags** (`status`, `order`, `indexed`, `nav`, `theme`, `contents`,
+`data`). Instructions to the build.
 
 **Provenance** (`revised`, `source`). Who to believe, and when it was last
 true.
 
-`summary` and `also_known_as` are the two that are genuinely text a reader
-reads, which makes them look like a fifth class. **They are not a licence for
-more.** Both are up here for the same narrow reason: each is needed somewhere
-the page's body is not available. Anything that does not clear that bar is
-prose.
+`summary` and `keywords` are the two that are genuinely text a reader reads,
+which makes them look like a fifth class. **They are not a licence for more.**
+Both are up here for the same narrow reason: each is needed somewhere the
+page's body is not available. Anything that does not clear that bar is prose.
 
 ## Required, always
 
@@ -131,12 +132,12 @@ lede and once as ordinary body text immediately below it.
 
     A field cannot be in the wrong place.
 
-## `also_known_as` is for the words that are not on the page
+## `keywords` is for the words that are not on the page
 
-A list of other names for the same thing. It renders as a quiet line at the
-foot -- *Also called: genie, personnel lift, MEWP* -- which is exactly how it
-reaches search: **the words are indexed because they are genuinely on the
-page.**
+Other names for the same thing, and the words somebody would search for that
+the page never says. It renders as a quiet line at the foot -- *Also called:
+genie, personnel lift, MEWP* -- which is exactly how it reaches search: **the
+words are indexed because they are genuinely on the page.**
 
 That is the whole design, and the rejected alternative explains it. A hidden
 keywords block does the same job invisibly, and a field nobody can see is a
@@ -146,6 +147,96 @@ stopped matching a term it used to find.
 Use it for jargon that differs from house vocabulary, not for stuffing. The
 search already indexes the entire body of every page; this is only for words
 that are genuinely absent from it.
+
+!!! warning "It was called `also_known_as` until 2026-08-04"
+
+    The old key is valid YAML, so a page still using it parses fine, is
+    silently ignored, and loses the line at the foot -- which looks exactly
+    like the feature being broken. Every page still carrying it is named in
+    the build report until nobody is.
+
+    The name widened what belongs here, which was the point rather than a side
+    effect: `also_known_as` could only honestly hold aliases, and `keywords`
+    also holds search words that are not names at all -- a lighting page
+    wanting `LX` and `electrics`. The rendered label moved for the same reason.
+
+## `nav` is what a FOLDER does in the sidebar
+
+**On an `index.md`, and nowhere else.** A `nav:` on a leaf page does nothing
+and the build report says so by name.
+
+| Value | Alias | The sidebar |
+| --- | --- | --- |
+| `collapsed` | `collapse` | a closed row you click to open |
+| `expanded` | `expand` | opens by itself, and so does everything under it |
+| `hidden` | `hide` | the folder keeps its row and loses its children |
+
+**The branch you are IN is always open, whatever it says.** That is Material's
+own behaviour and the engine is built never to remove it. So `collapsed` on a
+folder you are standing inside does nothing, and `hidden` is the value that
+empties a sidebar you are looking at.
+
+### The site root declares the default
+
+This is the part that is not like any other key on this page: **a folder's
+value can come from a different file.**
+
+The repo's top-level `index.md` sets what every folder inherits. Flipping the
+whole site between open and shut is one line there, in the content repo that
+owns the question -- not a setting in the engine four sites share.
+
+```yaml
+# index.md at the root of the content repo
+nav: collapsed   # every folder starts shut unless it says otherwise
+```
+
+A root index with no `nav:` collapses and is **reported**, in its own section
+of the build report. That is deliberate: on a folder, silence means *whatever my
+parent said*, which is the feature. On the site index there is no parent, so
+silence means nobody ever answered a question about every folder on the site.
+
+🚫 **`nav: hidden` on the site root is refused, out loud.** Inherited by every
+top-level folder it renders a sidebar of bare labels with nothing under any of
+them. The build reports it and uses `collapsed`. Put `hidden` on the individual
+folders you meant.
+
+### The cascade, and where it stops
+
+`expanded` flows down until a descendant index says otherwise. That is the
+whole reason the key has three values instead of being a boolean:
+
+```
+production/index.md          nav: expanded    opens
+production/crew/index.md     (nothing)        opens, inherited
+production/archive/index.md  nav: collapsed   stops here
+```
+
+`hidden` does not cascade, and does not need to: the whole subtree leaves the
+sidebar in one cut, so there is nothing underneath for an inherited value to
+reach.
+
+!!! warning "`expanded` anywhere turns pruning off for the WHOLE site"
+
+    Material's `navigation.prune` renders only the ancestors and siblings of
+    the page you are on. Every other section arrives with no children at all,
+    so opening one would open an empty box -- the control would work perfectly
+    and produce nothing.
+
+    So the engine drops pruning from the build the moment anything resolves to
+    `expanded`, and says so in the report. The cost is that every page then
+    ships the whole nav tree: **~33% of page weight**, Material's own figure.
+
+    It is **not available per-subtree.** Pruning is one boolean for the entire
+    theme. A site that never writes `expanded` never pays, and `nav: hidden`
+    claws a large part of it back, which is why both live in one key.
+
+### It is a curtain, not a lock
+
+A `hidden` folder's pages are still built, still have live URLs, still resolve
+by `@id`, and are **still in search**. `nav:` changes what a reader is OFFERED;
+`status:` changes what reaches the site at all. See
+[Publication states](@publication), including the table of which lever costs
+you what.
 
 ## Types
 
@@ -198,6 +289,16 @@ Both are the landing page of their folder, but that is an accident of where the
 file sits rather than what the page is about. Type the subject when there is
 one. The build does not complain either way.
 
+!!! note "`nav:` follows the FILENAME, not the type"
+
+    A folder index typed `venue` still speaks for its folder's sidebar
+    behaviour, and a root `index.md` typed `reference` still sets the site
+    default. The engine reads the filename, exactly as it does for the other
+    three index behaviours above.
+
+    Worth knowing because the type declaration is where a reader looks for the
+    list of legal keys, and `nav` is declared on `index` only.
+
 ### What it draws
 
 A contents list at the FOOT of the page -- after your prose, never above it --
@@ -214,6 +315,10 @@ and therefore generates nothing.
 
 The heading reads **In this section** normally, and **Also in this section**
 when your prose already covered some of them.
+
+⭐ **A `nav: hidden` folder still draws its contents list.** That is the pairing
+the feature is for: the pages leave the drawer and stay on the page that is
+supposed to point at them.
 
 ### Two controls, and they are opposite ends of one relationship
 
@@ -250,8 +355,8 @@ apart:
 
 So `indexed: false` is for something real but peripheral that would clutter a
 section's front door. If you want it gone from the sidebar too, that is
-`status: unlisted` and you do not need both. See
-[Publication states](@publication).
+`nav: hidden` on the folder or `status: unlisted` on the page, and you do not
+need both. See [Publication states](@publication).
 
 !!! warning "Three things here are called an index. `indexed:` means one of them"
     It refers to the contents list on the index **page** above this one, and

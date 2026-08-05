@@ -46,6 +46,10 @@ router_inherit: false           # only if a parent folder declares a router
 # CONDITIONAL - index lists. Opposite ends of one relationship.
 contents: auto                  # THIS page lists its children (non-index types)
 indexed: false                  # keep THIS page out of its parent's list
+
+# CONDITIONAL - the sidebar. index.md ONLY. Anywhere else it is reported.
+nav: collapse                   # collapse | expand | hide (-ed forms also work)
+                                # the ROOT index.md sets the site-wide default
 ---
 
 # Page Title
@@ -89,6 +93,12 @@ Two things that are always true and cause most of the trouble:
     It is **not implemented**. A page declaring it is published as `unlisted`
     with a warning in the build log: a live URL, absent from the sidebar, and
     not protected in any way. A `gate:` key beside it does nothing at all.
+
+!!! warning "`nav:` is not a gate either"
+
+    `nav: hide` takes a folder's pages out of the sidebar and leaves them
+    built, live, linkable and **searchable**. It is a curtain over one surface.
+    See [Publication states](@publication) for which lever costs what.
 
 ## Related
 
