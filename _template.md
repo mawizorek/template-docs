@@ -38,6 +38,9 @@ summary: One or two lines on what this is and who needs it.
 # CONDITIONAL - index lists. Opposite ends of one relationship.
 # contents: auto                # THIS page lists its children (non-index types)
 # indexed: false                # keep THIS page out of its parent's list
+
+# CONDITIONAL - the sidebar. THIS FILE'S NAME MUST BE index.md OR IT DOES
+# NOTHING. The repo's ROOT index.md sets the default all the others inherit.
 # nav: expand | collapse | hide
 ---
 
@@ -63,10 +66,14 @@ summary: One or two lines on what this is and who needs it.
      valid YAML, so it parses, gets ignored, and silently does nothing. The
      build names every page still using it.
 
+     ⚠️ `nav:` IS NEW (2026-08-05) AND IS index.md ONLY. On any other page it
+     is ignored and reported. It decides what a FOLDER does in the sidebar --
+     and the root index.md decides it for every folder that stays quiet.
+
      A page that ships carrying `Section heading`, `Revised Month Year`, or a
      stray commented-out key is the first thing an audit finds.
 
-     WHAT EACH KEY MEANS, AND THE NINE-QUESTION AUDIT CHECKLIST:
+     WHAT EACH KEY MEANS, AND THE AUDIT CHECKLIST:
      Authoring -> The gold standard. The keys are listed above; the rules
      behind them are not restated here. -->
 
