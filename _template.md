@@ -1,13 +1,15 @@
 ---
-# REQUIRED. No status, no page. No id, no links. No summary, no search result.
-id: kebab-case-forever          # set once, NEVER change it
+# REQUIRED.
+# No status, no page. # set once, NEVER change it
+# No id, no links.
+# No summary, no search result.
+id: kebab-case-forever          
 title: What A Human Reads
-status: hidden                  # hidden -> unlisted -> public
-type: page                      # page index venue space standard procedure reference
+status: hidden | unlisted | public
+type: page | index | venue | space | standard | procedure | reference
 summary: One or two lines on what this is and who needs it.
 
-# ---- Everything below is commented. Uncomment what this page needs,
-# ---- DELETE every line you do not use, then delete these four rules.
+# ---- Uncomment what this page needs ----
 
 # REQUIRED BY TYPE. Delete unless the type above needs it.
 # parent: building-id           # `space` only
@@ -36,6 +38,7 @@ summary: One or two lines on what this is and who needs it.
 # CONDITIONAL - index lists. Opposite ends of one relationship.
 # contents: auto                # THIS page lists its children (non-index types)
 # indexed: false                # keep THIS page out of its parent's list
+# nav: expand | collapse | hide
 ---
 
 <!-- Copy this file, rename it kebab-case, drop it in the right folder.
