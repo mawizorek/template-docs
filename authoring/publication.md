@@ -5,6 +5,7 @@ type: page
 status: public
 order: 30
 revised: 2026-08
+summary: What `status:` does, what it cannot do, and the two different ways to take something out of the sidebar.
 ---
 
 # Publication states
@@ -38,13 +39,45 @@ from anywhere, and an `@id` link to it is not broken.
 
 ## Removing a whole folder from the sidebar
 
-There is no folder-level switch. Set every page in the folder to `unlisted` and
-the section disappears on its own, because a section with no listed pages left
-is dropped rather than rendered as a heading that expands to nothing.
+**Put `nav: hidden` on the folder's `index.md`.** The folder keeps its own row
+and loses its children; every page under it stays built, stays a live URL,
+stays resolvable by `@id`, and **stays in search**. See
+[Frontmatter](@frontmatter) for the whole `nav:` key.
 
-The build report names any section it removes this way. That is deliberate: the
-usual cause is one page changing status and taking its entire folder off the
-sidebar with it, which is a bigger effect than the edit looked like.
+!!! warning "This page told you to do it the other way until 2026-08-05"
+
+    It said *there is no folder-level switch* and prescribed setting every page
+    in the folder to `unlisted`. That is now false, and it was always the
+    expensive answer: **`unlisted` removes those pages from SEARCH too**, which
+    is almost never what somebody clearing out a crowded drawer wants.
+
+    Written as a retraction rather than deleted, because pages in this family
+    were set `unlisted` on that advice and are quietly missing from search
+    results today.
+
+### Which lever you want
+
+| | Built | Sidebar | Search | `@id` links |
+| --- | --- | --- | --- | --- |
+| `nav: hidden` on the folder index | yes | **no** | **yes** | yes |
+| `status: unlisted` on each page | yes | no | no | yes |
+| `status: hidden` on each page | **no** | no | no | **broken** |
+
+The first is a curtain over the sidebar. The second is a curtain over the
+sidebar *and* search. The third is not a curtain at all -- the pages do not
+exist, and every link to them renders as a broken marker.
+
+🚫 **None of the three is a lock.** A `nav: hidden` page is exactly as public
+as it was before, and the last section of this page is the rule that actually
+matters.
+
+### A section can also empty itself by accident
+
+A section with no listed pages left is dropped rather than rendered as a
+heading that expands to nothing, and the build report names it. That is worth
+recognising rather than using: the usual cause is one page changing status and
+taking its entire folder off the sidebar with it, which is a bigger effect than
+the edit looked like.
 
 ## There is no cascade
 
@@ -57,13 +90,19 @@ as a retraction rather than quietly deleted, because the sentence was wrong in
 the most expensive direction available: somebody could set a folder index to
 `hidden`, believe the pages under it were covered, and publish all of them.
 
-`theme:` genuinely is inherited, and a page's own value beats its folder's.
+⚠️ **`nav:` DOES cascade, and it is not a publication state.** A folder index
+saying `nav: expanded` opens the folders under it until one says otherwise, and
+the site's root `index.md` sets the default for everything. That changes what a
+reader is OFFERED, never what is BUILT. One is a lock, one is a curtain, and
+this paragraph exists because somebody once believed the curtain was the lock.
+
+`theme:` is inherited the same way, and a page's own value beats its folder's.
 Being overridable is right for appearance and wrong for access, which is why
-the two are not built the same way.
+none of them is built like `status:`.
 
 ## Keeping a page out of an index list only
 
-`indexed: false` is a different lever and does not touch publication:
+`indexed: false` is a different lever again and does not touch publication:
 
 ```yaml
 ---
@@ -85,8 +124,9 @@ be combined.
 !!! warning "`indexed: false` is not a privacy setting"
     It hides one list of links on one page. The page stays in the sidebar,
     stays in search, stays in `doc-index.json`, and stays a public URL. If you
-    want it out of the sidebar, that is `status: unlisted` -- and read the rest
-    of this page before assuming that means protected either.
+    want it out of the sidebar, that is `nav: hidden` on the folder or
+    `status: unlisted` on the page -- and read the rest of this page before
+    assuming either means protected.
 
 ## About `gated`
 
@@ -99,7 +139,7 @@ it. The limits that would apply even to a real implementation:
 
 - a browser-side password ships to the reader inside the page it protects;
 - publication states control what reaches the **site**, never what is readable
-  in the repository, which is public;
+  in the repository;
 - **a GitHub Pages site is publicly reachable even when its repository is
   private.** Privately published Pages requires GitHub Enterprise Cloud.
 
