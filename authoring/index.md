@@ -65,6 +65,8 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
   and the rule that decides whether a new one may exist at all
 - [Writing a page](@writing) -- callouts, department tabs, tables, and the
   four-space indent rule that causes most formatting trouble
+- [Callout gallery](@callouts) -- every callout family rendered on one page, so
+  you can pick one by looking instead of guessing from its name
 - [Links](@links) -- `@id`, headings, and cross-site references
 - [Markers](@markers) -- `{.tbc}`, `{.conf}`, `{.gap}` and friends: saying how
   much a value can be trusted, and getting a list of every one on the site
