@@ -67,6 +67,9 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
   four-space indent rule that causes most formatting trouble
 - [Callout gallery](@callouts) -- every callout family rendered on one page, so
   you can pick one by looking instead of guessing from its name
+- [Data tables](@data-tables) -- a TSV drawn as a table on the page: the slot
+  contract, column types, the row that turns into a heading, and how to switch
+  the collapsing phone layout off
 - [Links](@links) -- `@id`, headings, and cross-site references
 - [Markers](@markers) -- `{.tbc}`, `{.conf}`, `{.gap}` and friends: saying how
   much a value can be trusted, and getting a list of every one on the site
