@@ -221,10 +221,16 @@ in the document, not in its header. See [Frontmatter](@frontmatter).
 
 **When a hand-written table gets big, it wants to be a data file.** Not a type.
 A hundred rows of dimmer circuits is unreadable as markdown and unmaintainable
-by anybody without a text editor open. Put it in a TSV beside the page, declare
-it with `data:`, and place it with a `<!-- dr:table -->` marker: it stays
+by anybody without a text editor open. Put it in a TSV beside the page, name it
+as a slot in the frontmatter, and place it with a `!!! data` block: it stays
 editable in a spreadsheet, diffable in git, and the reader gets a download link
 to the exact file it was drawn from.
+
+⚠️ **The old `<!-- dr:table -->` comment marker is retired and does nothing.**
+A page still carrying one renders no table and says nothing about why. The whole
+feature -- the frontmatter contract, the block, the options, column types, and
+the rule that turns a half-filled row into a heading -- is on
+[Data tables](@data-tables).
 
 ## The rules that prevent most surprises
 
@@ -265,6 +271,7 @@ to the exact file it was drawn from.
 
 ## Related
 
+- [Data tables](@data-tables) -- a TSV drawn as a table on the page
 - [Frontmatter](@frontmatter) -- the block at the top, and what may go in it
 - [Links](@links) -- `@id` links and cross-site references
 - [Publication states](@publication) -- who can see it
