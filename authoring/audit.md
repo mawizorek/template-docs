@@ -38,7 +38,12 @@ theme: eos
 related: [some-id, another-id]
 source: https://where-the-facts-came-from
 keywords: [genie, personnel lift, MEWP]   # renders visibly at the foot
-data: [circuits.tsv]            # TSVs beside this page, placed with a marker
+
+# OPTIONAL - data tables. A MAP of named slots, never a list of filenames.
+data:
+  schedule:                     # the SLOT. must be declared on the type above
+    file: circuits.tsv          # the file, beside this page
+    caption: Circuit schedule   # optional
 
 # CONDITIONAL - routers. All four are one feature; see the guide.
 router: [staff, pm]             # engine tables. LIST, never a repeated key
@@ -63,6 +68,99 @@ nav: collapse                   # collapse | expand | hide (or the -ed forms)
 the subject -- no capacity, no address, no owner. The rule that decides what
 may be added, and the seventeen fields removed for failing it, are in
 [Frontmatter](@frontmatter). Do not re-derive them here.
+
+!!! danger "This block taught the wrong `data:` form until 2026-08-07"
+
+    It carried <s>`data: [circuits.tsv]`</s> with a comment saying the table was
+    *"placed with a marker."* **Both halves were dead.**
+
+    The list form is not a shorthand -- it is the RETIRED form, and the engine
+    reports it by name and then ignores the whole key: *"the list form is
+    IGNORED, which looks exactly like the tables never having worked."* The
+    marker was replaced by the `!!! data` block on 2026-08-04.
+
+    Struck rather than quietly corrected, because pages have already been
+    written from this block. If one of yours has a `data:` line in square
+    brackets, its table has never rendered.
+
+## Attaching a data table
+
+**Two parts, and the body never names a file.**
+
+```yaml
+data:
+  schedule:
+    file: circuits.tsv
+    caption: Circuit schedule     # optional
+```
+
+```
+!!! data "schedule"
+    sort: Circuit
+    hide: internal_notes
+```
+
+The frontmatter binds a **slot** to a file; the body places that slot. That is
+what lets the same paragraph be copied between the audio, lighting and video
+copies of a page with only the filenames underneath changing.
+
+⚠️ **A slot name is not free text. It must be declared on the page's `type`.**
+`reference` allows `schedule`, `survey`, `inventory_table`, `revision_log` and
+`catalog`. An undeclared slot is reported and the block renders as a visible
+**Undeclared data slot** box.
+
+⚠️ **A type that declares NO slots accepts any name.** Empty means unrestricted,
+not forbidden -- so the same `data:` block can pass on a `page` and fail on a
+`reference`, and nothing about the block itself says which.
+
+⚠️ **The option lines are indented four spaces and follow immediately.** A blank
+line between the block and its options ends the block, and the options are then
+read as body text.
+
+Declaring a slot and never placing it is reported. So is placing a slot that is
+not declared. See [Writing a page](@writing).
+
+## Attaching an image
+
+```
+![What the image shows](@img:file-name){ caption="What the reader needs told" }
+```
+
+**The filename without its extension is the name.** `h5-front.png` is
+`@img:h5-front`. Nothing is declared and there is no frontmatter key -- the
+build walks the tree and finds it, so an image is reachable from any page in the
+repository and **keeps working when it moves.**
+
+A plain relative path still works and is still correct for an image sitting
+beside its page. It breaks silently when either end moves, which is the whole
+argument for the name.
+
+### Alt text and a caption are different sentences
+
+| | Who reads it | Job |
+| --- | --- | --- |
+| `[ … ]` | screen readers, and anyone whose image failed | **replaces** the image |
+| `caption="…"` | everybody, printed underneath | **accompanies** the image |
+
+The square brackets have always been there and are **never displayed**. Writing
+a label there is the most common mistake in this family: `![Rep plot](@img:rep-plot)`
+is a badly alt-texted image, not a titled one.
+
+⚠️ If the caption genuinely says everything, write `alt=""`. An empty alt is a
+real value for a decorative image; repeating the caption in the brackets makes a
+screen reader announce the same sentence twice.
+
+⚠️ **An image name must be unique across the whole repository**, because the name
+is global. Two files called `menu.png` make `@img:menu` ambiguous and the build
+refuses it rather than guessing -- two pictures with one name are two different
+pictures. Name for the thing: `h5-menu.png`, not `menu.png`.
+
+⚠️ **The image must be alone on its line at zero indent to carry a caption.** An
+image mid-sentence is legal and simply cannot have one.
+
+🚫 **Markdown's own `"title"` string does nothing useful.** It is absent on touch
+devices, announced inconsistently, and unreachable by keyboard. The engine
+neither adds nor removes it. Use the caption.
 
 ## Body shape
 
@@ -115,6 +213,11 @@ report is the fast version of this list.
     no dead keys from the table below still in the header?
 12. Any `nav:` on a page that is **not** an `index.md`? It does nothing there
     and the build says so. See [Frontmatter](@frontmatter).
+13. Is `data:` a **map of slots**, each with a `file:`, and is every slot both
+    declared on the type and placed with a `!!! data` block? A `data:` line in
+    square brackets is the retired form and renders nothing at all.
+14. Does every image carry **alt text that describes it** rather than a label,
+    and is any caption in `caption="…"` rather than stuffed into the brackets?
 
 !!! note "This list does not say how long it is"
 
@@ -138,6 +241,8 @@ indistinguishable from the feature being broken.
 | `gate:` | Nothing. It was never implemented. Use `router:` |
 | `listed:` | `indexed:` |
 | `also_known_as:` | `keywords:` |
+| `data: [file.tsv]` | The **map** form above. The list form is reported and ignored |
+| `image:` `images:` `media:` | Nothing. An image is referenced in the BODY, never declared in the header |
 | `capacity:` `dimensions:` `grid_height:` `power:` `seating:` `rigging:` | Write them in the body, or a TSV via `data:` |
 | `address:` `city:` `operator:` `access_notes:` | Same. Body or data file |
 | `owner:` `frequency:` `trigger:` `systems:` | Same |
