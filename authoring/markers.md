@@ -9,14 +9,14 @@ revised: 2026-08
 
 # Markers
 
-Inline tags that say how much to **trust** the thing beside them. They sit
-inside a sentence, because the doubt usually belongs to one value rather than
-to the whole paragraph.
+Inline tags. They sit inside a sentence, because what they are about is usually
+one value rather than the whole paragraph.
 
 ```markdown
 The second altered curtain is not named: [To be confirmed]{.tbc}
 Cyc width [40'-0"]{.conf}, previously [48'-0"]{.was}
-Grid height [18'-0"]{.est} above deck
+A [source 4]{.term} is an ERS fixture
+The key is in [the SM office]{.hi}
 ```
 
 Used bare, a marker prints its own label:
@@ -25,7 +25,14 @@ Used bare, a marker prints its own label:
 Grid height: {.gap}
 ```
 
-## The six
+## Three families
+
+Every marker belongs to a **family**, and the family is what decides the colour.
+This matters more than it looks: the build report groups by family, so *what is
+still unconfirmed across this site* stays answerable no matter how many terms or
+highlights a page carries.
+
+### Confidence -- how much to trust the value beside it
 
 | Marker | Means | Use it when |
 | --- | --- | --- |
@@ -36,17 +43,48 @@ Grid height: {.gap}
 | `{.est}` | Estimate | Approximate. Plan with it, do not cut to it |
 | `{.was}` | Superseded | The old value, kept so old paperwork can still be matched up |
 
-Hover any of them on the live site for the same explanation.
+### Terminology -- a defined word
 
-## They are all one category, on purpose
+| Marker | Means |
+| --- | --- |
+| `{.term}` | House terminology, with or without a page behind it |
 
-Every marker answers *how much should I trust this?* — nothing else. They are
-not highlighters and they are not decoration.
+Where the word has a page, write it as a link instead and it resolves:
+`[ETC](@term:etc)`. Same colour, same weight; the underline is the only
+difference a reader sees, and it means what underlines always mean. See
+[Links](@links).
 
-That constraint is what keeps the set small enough to learn in ten seconds. If
-you want a seventh, the question to answer first is whether a reader could
-confuse it with one of these six. **Six distinguishable markers beat twelve
-that all vaguely mean "careful".**
+### Highlight -- worth your attention
+
+| Marker | Means |
+| --- | --- |
+| `{.hi}` | Look here. Says nothing about whether the value is right |
+
+This one is a highlighter, and it is the only one that is. It exists because
+sometimes you want an eye drawn to a sentence without making a claim about it.
+
+⚠️ **It is not a quiet `{.tbc}`.** If you mean *I have not checked this*, say
+that -- the confidence markers are counted as doubt and `{.hi}` is not, so a
+highlight used to mean uncertainty is a doubt that never appears in the report.
+
+## They are not all one category any more
+
+They were, for a long time, and this page said so: *"every marker answers how
+much should I trust this -- nothing else. They are not highlighters and they are
+not decoration."*
+
+That was true when there were six, it stopped being true when terminology
+arrived, and `{.hi}` is now a highlighter in as many words. Corrected rather than
+deleted, because it was a real rule and anybody who read it will remember it.
+
+**What replaced it is the family, not a free-for-all.** The old rule was
+protecting the build report -- a mixed bag of markers cannot answer one question.
+Families protect the same thing better, because the report groups by family and
+each family answers its own question.
+
+The bar for a new one is unchanged in spirit: **could a reader confuse it with
+something already here?** Six distinguishable markers still beat twelve that all
+vaguely mean *careful*.
 
 ## Why `.was` earns its place
 
@@ -73,11 +111,11 @@ and never know they did.
 
 This is the part that makes them worth using rather than just typing TBD.
 
-Every marker on the site is **listed in the build report**, grouped by type and
+Every marker on the site is **listed in the build report, grouped by family** and
 named by page. So *what is still unconfirmed across this entire site* is a
 question with an answer, and it shows up every time you [preview](@publishing).
 
-It is listed as inventory, not as an error — a page full of markers is still a
+It is listed as inventory, not as an error -- a page full of markers is still a
 clean build. Marking your doubts is good practice, not a defect.
 
 It also means a verification pass is **finishable**: walk the space, mark things
@@ -85,17 +123,25 @@ It also means a verification pass is **finishable**: walk the space, mark things
 
 ## Adding one
 
-Markers are defined in `theme/markers.tsv` in the engine — one row each, with a
-label, a shape (`box`, `plain`, `strike`, `soft`), a colour, and the tooltip. No
-code change.
+A new **marker** is a row in `theme/markers.tsv` in the engine. A whole new
+**family** is a row in `theme/marker-classes.tsv`. Neither is a code change.
 
-Colour can be any theme token or a literal value. **Prefer a token**: it follows
-the theme into light mode and across every site, where a hardcoded colour is
-frozen where you typed it and will be wrong on the scheme you were not looking
-at.
+A family sets the default shape (`box`, `plain`, `strike`, `soft`), the colour,
+and how strongly a boxed chip is tinted. A marker row inherits all of it and can
+override the shape or the colour.
+
+**Prefer a token to a literal colour.** A token follows the theme into light mode
+and across every site; a hardcoded colour is frozen where you typed it and will
+be wrong on the scheme you were not looking at.
+
+⚠️ **Two markers must never share a colour**, even across families -- they turn
+up in the same sentence at the same size, and paint is the only thing telling
+them apart. Callouts are the opposite and reuse colour freely, because two boxes
+are never side by side in one line.
 
 ## Related
 
-- [Frontmatter](@frontmatter) — where required fields are declared
-- [Publishing](@publishing) — where the marker report appears
-- [Routers](@routers) — the other inline tool, for routing rather than confidence
+- [Frontmatter](@frontmatter) -- where required fields are declared
+- [Links](@links) -- `@term:`, and every other kind of reference
+- [Publishing](@publishing) -- where the marker report appears
+- [Routers](@routers) -- the other inline tool, for routing rather than confidence
