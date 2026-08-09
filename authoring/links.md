@@ -5,6 +5,7 @@ type: page
 status: public
 order: 20
 revised: 2026-08
+summary: Every kind of reference -- pages, headings, sibling sites, images, data tables and markers -- and why none of them name a file path.
 ---
 
 # Links
@@ -12,8 +13,8 @@ revised: 2026-08
 Internal links name a page's `id`, never its file path. That single decision is
 why reorganising this repository cannot break it.
 
-**The same idea covers images and data tables.** Everything below names a
-thing; nothing below names a location.
+**The same idea covers images, data tables and markers.** Everything below names
+a thing; nothing below names a location.
 
 | Write | Reaches |
 | --- | --- |
@@ -23,6 +24,16 @@ thing; nothing below names a location.
 | `![alt](@img:h5-front)` | an image anywhere in this site |
 | `[the schedule](@data:circuit_schedule)` | a data table on this page |
 | `[ETC](@term:etc)` | a defined term, styled as terminology |
+| `[fkWeek](@rel:table-weeks)` | a relationship, styled as schema |
+| `[dateFormat](@calc:table-workdays#calc-fmt)` | a calculation, at its heading |
+| `[Producers](@vl:table-value-lists)` | a value list |
+| `[create_EDITION](@script:script-create-edition)` | a script |
+| `[Print Menu](@layout:layout-print-menu)` | a layout |
+| `[fkCal](@alias:table-workdays#calc-fkCalendar)` | a retired name for a live one |
+
+The last six are **marker link forms**: they resolve like any other reference and
+also carry their marker's colour. Each one has a plain span twin for when there
+is nothing to point at. See [Markers](@markers).
 
 ## Within this site
 
@@ -64,6 +75,12 @@ list of its pages; nothing publishes a list of its images. Copy the file into
 this repository instead of pointing at theirs -- a broken `@peer:id` is caught
 while the site builds, and a broken image URL is caught by nobody.
 
+⚠️ **A peer site may not be named after a prefix.** If a sibling were slugged
+`rel`, the prefix would win and every link to that peer would stop resolving.
+The build reports the collision. This is worth knowing because the list of
+prefixes now **grows with a data edit** -- adding a marker link form can newly
+collide with a peer that has been fine for months.
+
 ## To an image
 
 ```markdown
@@ -94,15 +111,41 @@ filename. If the table is embedded on the page, the link jumps to it; if the
 slot is declared but not placed, the link downloads the file -- which is the
 honest answer, because there is nothing on the page to jump to.
 
-## ⚠️ A prefixed reference takes no `#anchor`
+## Which prefixes take an `#anchor`
+
+~~**A prefixed reference takes no `#anchor`.** It parses, it resolves, and the
+anchor is silently discarded -- you get a correct-looking link to the top of the
+right place. The build reports it. Only a plain `@id` to a page carries an
+anchor.~~
+
+**Struck 2026-08-09.** That was true of every prefix for four days and is now
+true of only some, so it is left visible rather than rewritten: it is exactly the
+kind of limitation a reader remembers and designs around, and quietly deleting it
+would leave people avoiding something that works.
+
+**It depends on what the prefix ADDRESSES**, which is the honest version of the
+rule and always was:
+
+| Prefix | Anchor | Because |
+| --- | --- | --- |
+| plain `@id` | ✅ carried | a page has headings |
+| `@peer:` | ✅ carried | so does a page on a sibling site |
+| `@calc:` `@rel:` `@vl:` `@script:` `@layout:` `@alias:` `@term:` | ✅ carried | these address a **page**, and the thing you mean may be a heading on it |
+| `@data:` | 🚫 dropped, reported | addresses a whole TABLE. There is nowhere for a fragment to point |
+| `@img:` | 🚫 dropped, reported | addresses a whole PICTURE. Same |
+
+⭐ **`@calc:` is the one that NEEDS it.** A calculation has no page of its own --
+it lives at a heading on its table's page -- so the fragment is not an
+embellishment, it is half the address:
 
 ```markdown
-[the totals](@data:inventory#totals)     the #totals is DROPPED
+[dateFormat_Colloquial](@calc:table-workdays#calc-dateFormat_Colloquial)
 ```
 
-It parses, it resolves, and the anchor is silently discarded -- you get a
-correct-looking link to the top of the right place. The build reports it. Only
-a plain `@id` to a page carries an anchor.
+Write the target heading's anchor **explicitly** (`### name {#calc-name}`). An
+automatic heading anchor is derived from the heading text and lowercased, so
+retitling the heading breaks every inbound link while both ends still look fine.
+See [Markers](@markers) for the convention.
 
 ## When a link does not resolve
 
@@ -119,6 +162,11 @@ outcome than a site that silently stops updating.
 Here is what one looks like: [a page that does not
 exist](@no-such-page-anywhere).
 
+⚠️ **A marker link that does not resolve stays a broken link.** It never quietly
+falls back to the underlineless span form -- that would be a second legal way to
+write a reference that failed, and *which of these still have no page* would stop
+being answerable.
+
 ## Never use a full URL for an internal page
 
 A hardcoded `https://` link to another page in this family will not be checked,
@@ -128,4 +176,5 @@ the id.
 ## Related
 
 - [The gold standard](@audit) -- the frontmatter block and the audit checklist
-- [Markers](@markers) -- `@term:`, and confidence on a single value
+- [Markers](@markers) -- every marker family, both forms, and where a calc
+  definition goes

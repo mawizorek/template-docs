@@ -70,9 +70,12 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
 - [Data tables](@data-tables) -- a TSV drawn as a table on the page: the slot
   contract, column types, the row that turns into a heading, and how to switch
   the collapsing phone layout off
-- [Links](@links) -- `@id`, headings, and cross-site references
-- [Markers](@markers) -- `{.tbc}`, `{.conf}`, `{.gap}` and friends: saying how
-  much a value can be trusted, and getting a list of every one on the site
+- [Links](@links) -- `@id`, headings, cross-site references, and which prefixes
+  carry a heading anchor
+- [Markers](@markers) -- tagging one value inside a sentence: how much to trust
+  it (`{.tbc}`, `{.conf}`, `{.gap}`), what kind of thing it is (`{.button}`,
+  `{.calc}`, `{.rel}`), and the link forms that point at it (`@rel:`, `@calc:`)
+  so the build report becomes a map rather than a count
 
 ## Publishing
 
