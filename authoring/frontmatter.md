@@ -4,7 +4,7 @@ title: Frontmatter
 type: page
 status: public
 order: 10
-revised: 2026-08
+revised: 2026-10
 summary: The block at the top of every page, and the entire interface between what you write and what the renderer does.
 ---
 
@@ -89,6 +89,33 @@ machinery, it IS the documentation.* A grid height is the same kind of thing.
 folder or retitling the page cannot break an inbound link, because none of
 those is what a link points at. That promise only holds if the id never
 changes.
+
+### ⭐ The filename IS the id
+
+> **A page lives at `<id>.md`, character for character.**
+
+Michael, 2026-10-04: *"the page names SHOULD be the page id."* It is the rule
+images already follow, where the stem of the file is the name and nothing is
+declared.
+
+The two have to agree because they leak into different places. An `@id` link
+resolves on the id; the published URL is built from the filename. Anything that
+only sees one of them -- a binder `chain:`, a ClickUp row, a hand-typed link,
+an automation building a URL -- quietly guesses the other, and guesses wrong.
+
+The evidence that settled it, from one sweep of two sites on 2026-10-04: **10
+pages whose filename and id disagreed** (plus a stray duplicate), two binders
+chaining a FILENAME that was never an id (so those members could not resolve),
+one typo that lived only in a filename, and a ClickUp index whose links broke
+every time a row's id was corrected.
+
+**When they disagree, rename the FILE, never the id.** The id is the promise;
+the filename is only an address. A rename changes the published URL and breaks
+no `@id` link. The one time the id itself is wrong (a migration leftover, a
+prefix from another site), fixing it means finding every inbound reference
+first, across every repo, in the same change.
+
+`index.md` is the one exception. Its name is its position, not its identity.
 
 **Classification** (`type`, `parent`). What kind of thing this page is, and
 what contains it.
