@@ -5,6 +5,7 @@ type: page
 status: public
 order: 99
 revised: 2026-08
+related: [audit, frontmatter]
 summary: The block, ready to copy, with every real key in the order the spec puts them.
 ---
 
@@ -99,8 +100,3 @@ Two things that are always true and cause most of the trouble:
     `nav: hide` takes a folder's pages out of the sidebar and leaves them
     built, live, linkable and **searchable**. It is a curtain over one surface.
     See [Publication states](@publication) for which lever costs what.
-
-## Related
-
-- [The gold standard](@audit)
-- [Frontmatter](@frontmatter)
