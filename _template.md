@@ -58,6 +58,10 @@ summary: One or two lines on what this is and who needs it.
      under the real lede, usually saying the same thing twice, and the build
      reports it.
 
+     ⚠️ NO `## Related` FOOTER. Related pages go in `related:` above, as ids.
+     The engine draws them at the foot, above Keywords and Revised. A body
+     block prints them twice, and the build reports it.
+
      ⚠️ IF A VALUE IS NOT NEEDED AWAY FROM THIS PAGE, IT IS NOT A HEADER KEY.
      Write it in the body, or put it in a TSV. A dozen fields were removed on
      2026-08-03 for failing that test.
@@ -82,7 +86,3 @@ summary: One or two lines on what this is and who needs it.
 ## Section heading
 
 Plain paragraph. Blank line between every block.
-
-## Related
-
-- [Using these docs](@using-these-docs)
