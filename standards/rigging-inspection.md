@@ -5,6 +5,9 @@ type: procedure
 status: public
 order: 20
 summary: A worked example of the procedure type - a thing somebody does, in an order, on some occasion.
+related:
+  - main-stage: a space this applies to
+  - documentation-review: the standard beside this procedure
 revised: 2026-08
 ---
 
@@ -31,8 +34,3 @@ That sentence used to justify an `owner:` frontmatter field, which the
 note that the argument never actually supported it. "Somebody must be able to
 see who owns this" is an argument for a person reading a name on the page, and
 a header key is the one place a reader does not look.
-
-## Related
-
-- [Main Stage](@main-stage), a space this applies to
-- [Documentation review](@documentation-review), the standard beside this procedure
