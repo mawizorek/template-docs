@@ -5,6 +5,9 @@ type: page
 status: public
 order: 40
 revised: 2026-08
+related:
+  - publication: what `hidden`, `unlisted` and `public` mean, and the honest limits of each
+  - frontmatter: "where `status:` lives"
 ---
 
 # Publishing
@@ -74,9 +77,3 @@ The site just stops changing. If the stamp does not name your run, the deploy
 did not take -- check the workflow run rather than refreshing.
 
 Allow about a minute after a green publish.
-
-## Related
-
-- [Publication states](@publication) -- what `hidden`, `unlisted` and `public`
-  mean, and the honest limits of each
-- [Frontmatter](@frontmatter) -- where `status:` lives
