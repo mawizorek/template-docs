@@ -5,6 +5,9 @@ type: standard
 status: public
 order: 10
 summary: What has to be true of a page before it is allowed to be public, and how often somebody checks that it still is.
+related:
+  - audit: the full checklist this summarises
+  - rigging-inspection: a procedure beside this standard
 revised: 2026-08
 ---
 
@@ -35,8 +38,3 @@ nobody can point to the decision and nobody notices when it stops being true.
 It is not a spelling pass. It is a check that the facts on the page are still
 facts. A beautifully written page describing a room that was rebuilt two years
 ago is worse than no page, because somebody will act on it.
-
-## Related
-
-- [The gold standard](@audit), the full checklist this summarises
-- [Rigging inspection](@rigging-inspection), a procedure beside this standard
