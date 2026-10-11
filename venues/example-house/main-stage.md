@@ -6,6 +6,9 @@ status: public
 parent: example-house
 order: 10
 summary: The 480-seat proscenium house at Example House, and what it takes to work in it.
+related:
+  - studio: the other space in this building
+  - rigging-inspection: the procedure that applies here
 revised: 2026-08
 ---
 
@@ -35,8 +38,3 @@ This heading carries an explicit anchor, which is what makes
 `[the notes](@main-stage#venue-notes)` safe to link to from another page. Link
 to a heading without one and the link is riding on the heading text, so it dies
 quietly the first time somebody rewords it.
-
-## Related
-
-- [Studio](@studio), the other space in this building
-- [Rigging inspection](@rigging-inspection), the procedure that applies here

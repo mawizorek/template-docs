@@ -6,6 +6,9 @@ status: public
 order: 20
 revised: 2026-08
 summary: Every kind of reference -- pages, headings, sibling sites, images, data tables and markers -- and why none of them name a file path.
+related:
+  - audit: the frontmatter block and the audit checklist
+  - markers: every marker family, both forms, and where a calc definition goes
 ---
 
 # Links
@@ -172,9 +175,3 @@ being answerable.
 A hardcoded `https://` link to another page in this family will not be checked,
 will not be reported when it breaks, and will not survive the site moving. Use
 the id.
-
-## Related
-
-- [The gold standard](@audit) -- the frontmatter block and the audit checklist
-- [Markers](@markers) -- every marker family, both forms, and where a calc
-  definition goes

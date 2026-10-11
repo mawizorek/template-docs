@@ -7,6 +7,11 @@ order: 2
 revised: 2026-08
 summary: Where everything lives - documents, machinery, configuration - and the two questions that decide where a new thing belongs.
 also_known_as: [architecture, the layer map, where does this go]
+related:
+  - frontmatter: the header contract, and the away-from-the-page rule
+  - writing: the inline syntax in full
+  - audit: the copyable block and the audit checklist
+  - publishing: how a written page becomes a visible one
 ---
 
 # How this works
@@ -188,10 +193,3 @@ with no reader seeing it. See [Publishing](@publishing).
 no commit links, not even on the revision log. These are finished reference
 documents, not a project looking for contributors. The one quiet *Edit this
 page* line at the foot is a deliberate exception and is switched off per site.
-
-## Related
-
-- [Frontmatter](@frontmatter) -- the header contract, and the away-from-the-page rule
-- [Writing a page](@writing) -- the inline syntax in full
-- [The gold standard](@audit) -- the copyable block and the audit checklist
-- [Publishing](@publishing) -- how a written page becomes a visible one

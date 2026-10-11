@@ -6,6 +6,11 @@ status: public
 order: 5
 revised: 2026-08
 summary: The markdown that does something beyond plain prose - callouts, department tabs, tables, and the one indentation rule that causes most of the trouble.
+related:
+  - data-tables: a TSV drawn as a table on the page
+  - frontmatter: the block at the top, and what may go in it
+  - links: "`@id` links and cross-site references"
+  - publication: who can see it
 ---
 
 # Writing a page
@@ -269,9 +274,7 @@ the rule that turns a half-filled row into a heading -- is on
    different, it needs a stylesheet change in the engine, and that fix helps
    every site instead of one paragraph.
 
-## Related
-
-- [Data tables](@data-tables) -- a TSV drawn as a table on the page
-- [Frontmatter](@frontmatter) -- the block at the top, and what may go in it
-- [Links](@links) -- `@id` links and cross-site references
-- [Publication states](@publication) -- who can see it
+7. **Related pages are `related:` in the frontmatter, not a `## Related`
+   heading.** Same shape as rule 3: the engine draws the line at the foot,
+   resolved by id, so a link cannot rot when a page moves. A note per entry
+   comes with it, as `- id: why this page points there`.

@@ -6,6 +6,8 @@ status: public
 parent: example-house
 order: 20
 summary: The 9m square studio at Example House - flexible, and deliberately half-documented.
+related:
+  - main-stage: the fully documented counterpart
 revised: 2026-08
 ---
 
@@ -34,7 +36,3 @@ draws a conclusion and never learns it was wrong.
 
 An anchored heading, here so that the linking examples elsewhere in this site
 have something real to point at.
-
-## Related
-
-- [Main Stage](@main-stage), the fully documented counterpart

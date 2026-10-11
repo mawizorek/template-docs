@@ -5,6 +5,9 @@ type: page
 status: public
 order: 50
 revised: 2026-08
+related:
+  - publication: "`unlisted`, and the honest limits"
+  - markers: the other inline tool, for confidence rather than routing
 ---
 
 # Routers
@@ -204,8 +207,3 @@ is which.
 
 That is a real mechanism doing a modest job. It is not a security boundary, and
 being honest about that is the point.
-
-## Related
-
-- [Publication states](@publication) -- `unlisted`, and the honest limits
-- [Markers](@markers) -- the other inline tool, for confidence rather than routing

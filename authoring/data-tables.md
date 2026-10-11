@@ -6,6 +6,11 @@ status: public
 order: 7
 revised: 2026-08
 summary: How a TSV beside a page becomes a table on it, what a header cell can declare, why a half-filled row turns into a heading, and how to switch the phone layout off.
+related:
+  - writing: hand-written tables, and when one wants to become a data file instead
+  - links: "`@data:` mentions, and every other reference form"
+  - frontmatter: the block at the top, and what may go in it
+  - markers: confidence on a single value, inside a cell or a sentence
 ---
 
 # Data tables
@@ -292,12 +297,5 @@ renders as a dead reference.** The page does not appear broken; it appears
 absent.
 
 **Quote any title, summary or caption containing a colon followed by a space.**
-
-## Related
-
-- [Writing a page](@writing) -- hand-written tables, and when one wants to
-  become a data file instead
-- [Links](@links) -- `@data:` mentions, and every other reference form
-- [Frontmatter](@frontmatter) -- the block at the top, and what may go in it
-- [Markers](@markers) -- confidence on a single value, inside a cell or a
-  sentence
+⚠️ The same applies to a note inside `related:`, and to anything opening with a
+backtick or an `@`, which YAML reserves at the head of a plain value.

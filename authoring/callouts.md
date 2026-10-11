@@ -6,6 +6,10 @@ status: public
 order: 6
 revised: 2026-08
 summary: Every callout family, rendered, so you can pick one by looking instead of guessing from a name.
+related:
+  - writing: what each family means, and when to reach for it
+  - markers: the inline version, for confidence in one value
+  - audit: the frontmatter block and the audit checklist
 ---
 
 # Callout gallery
@@ -170,9 +174,3 @@ straight into the page as written.
 
     So a typo does not look broken. It looks like a note. That is the reason to
     stay with the families above.
-
-## Related
-
-- [Writing a page](@writing) -- what each family means, and when to reach for it
-- [Markers](@markers) -- the inline version, for confidence in one value
-- [The gold standard](@audit) -- the frontmatter block and the audit checklist
