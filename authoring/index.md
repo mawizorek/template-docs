@@ -4,7 +4,7 @@ title: Authoring
 type: index
 status: public
 order: 0
-revised: 2026-08
+revised: 2026-10
 summary: Everything you need to write a page and get it published.
 ---
 
@@ -70,6 +70,9 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
 - [Data tables](@data-tables) -- a TSV drawn as a table on the page: the slot
   contract, column types, the row that turns into a heading, and how to switch
   the collapsing phone layout off
+- [Images](@authoring-images) -- `@img:` names, why a name beats a path, the
+  repository-wide uniqueness rule the build refuses to guess around, and the
+  difference between alt text and a caption
 - [Links](@links) -- `@id`, headings, cross-site references, and which prefixes
   carry a heading anchor
 - [Markers](@markers) -- tagging one value inside a sentence: how much to trust
