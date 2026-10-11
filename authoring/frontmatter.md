@@ -23,7 +23,7 @@ parent: example-house   # the id of its container, never a path
 order: 10               # sidebar weight. Absent sorts alphabetically.
 indexed: false          # keep out of the parent index page's contents list
 nav: collapse           # index.md ONLY. What this FOLDER does in the sidebar.
-theme: utility          # optional skin override
+theme: utility          # optional. Overrides the REPO's theme, on this page.
 related: [studio]       # ids
 keywords: [the big house]        # other names and search words, shown at the foot
 data: [circuits.tsv]    # data files beside this page, drawn as tables
@@ -137,6 +137,25 @@ page's body is not available. Anything that does not clear that bar is prose.
 name in the build log. A page missing `status` is not built at all, and a page
 missing `summary` shows up in search with nothing under its title.
 
+⭐ **Only `status` is a GATE. `summary` never stops a build**, ruled
+2026-10-11: *"Summaries should not break the build if they do not exist. They
+should be required in the sense that the renderer publishes a report saying
+that every page wants one, but not having one should not break the build."* So
+write one on every page, and a page that ships without one costs you a report
+line rather than a site.
+
+!!! note "Three required fields or four, and both answers were right"
+
+    The engine's own README said three -- `id`, `title`, `status` -- while this
+    page and the engine's type declaration said four. A review on 2026-10-10
+    read that as a contradiction and called this page's count the majority
+    opinion. It was not a contradiction: **the README was counting GATES and
+    this page lists what every page OWES.** Both now say which they mean.
+
+    Worth knowing because it is the shape of most "the docs disagree"
+    findings. Two files counting different things look identical to two files
+    disagreeing, right up until somebody asks what each sentence is for.
+
 ## `summary` is the lede
 
 One or two lines: what this is and who needs it. It renders large and light
@@ -186,6 +205,44 @@ that are genuinely absent from it.
     effect: `also_known_as` could only honestly hold aliases, and `keywords`
     also holds search words that are not names at all -- a lighting page
     wanting `LX` and `electrics`. The rendered label moved for the same reason.
+
+## `theme` belongs to the REPO, and a page may override it
+
+**The theme is a property of the repo.** It is one line in that site's config
+on the engine side, every page under it wears it, and that is the normal
+answer. You do not need to write `theme:` on anything.
+
+A page that does write it gets its own stylesheet, inlined last on that page,
+and wins -- over the repo's theme and over the site's own hand-written CSS:
+
+```yaml
+theme: papyrus                                 # one theme, both toggle states
+theme: {dark: sharp-mclaren, light: papyrus}   # or name each slot
+```
+
+⭐ **Ruled 2026-10-11:** *"It is a per-repo theme and we know this; that is not
+new. Theme is just able to override that per page."* Both are true at once and
+always were, so naming a theme on a page is not irregular and does not need
+justifying.
+
+⚠️ **There is no FOLDER theme and there is not going to be.** The content trees
+are flattening into one `REPO_PAGES` folder addressed by id, so there is no
+folder level left to inherit a look from -- which is exactly why per-page gets
+used more than it otherwise would: *"Theme probably shouldn't be used per page,
+but I am going to because we are losing folder inheritance."*
+
+🚫 **A name that is not a real theme is SKIPPED, never substituted.** The page
+stays on the repo's theme, and the build report names both the page and the
+name you typed. It does not fall back to some default skin: repainting a page
+in something nobody asked for sends you hunting a palette bug instead of a
+typo.
+
+!!! note "A themed page costs a few KB of inline CSS, uncached"
+
+    Fine at a handful of pages, which is what this is for. If dozens of pages
+    end up carrying `theme:`, the engine publishes one shared sheet per theme
+    instead -- the mechanism changes and this grammar does not, so nothing you
+    wrote needs revisiting.
 
 ## `nav` is what a FOLDER does in the sidebar
 
