@@ -10,6 +10,8 @@ summary: Everything you need to write a page and get it published.
 
 # Authoring
 
+**Decision history:** [Authoring Contract (doc standard) — Decision Log](https://app.clickup.com/36074068/v/dc/12cwjm-54133/12cwjm-81233) — why the rules in this folder are the way they are. Split out of the engine's log on 2026-10-10 because the two have different readers: that one is for whoever builds the renderer, this one is for whoever writes a page. ⚠️ One question is OPEN there and affects this folder: whether a ClickUp table ever WRITES frontmatter into these files or only mirrors them. Until it is answered, **the file is the source of truth.**
+
 ## The ninety-second version
 
 Drop a `.md` file in the right folder. Give it frontmatter. That is the whole
