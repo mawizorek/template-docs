@@ -6,6 +6,13 @@ status: public
 order: 5
 revised: 2026-08
 summary: One block to copy into a new page, and one checklist to audit an old one.
+related:
+  - frontmatter
+  - writing
+  - links
+  - markers
+  - publication
+  - routers
 ---
 
 # The gold standard
@@ -35,7 +42,9 @@ parent: building-id             # `space` only
 order: 10                       # plain integer, unquoted, NO leading zero
 revised: 2026-08
 theme: eos
-related: [some-id, another-id]
+related:                        # the foot-of-page links. bare ids, or `id: note`
+  - some-id: why THIS page points there -- optional, per entry
+  - another-id
 source: https://where-the-facts-came-from
 keywords: [genie, personnel lift, MEWP]   # renders visibly at the foot
 
@@ -82,6 +91,21 @@ may be added, and the seventeen fields removed for failing it, are in
     Struck rather than quietly corrected, because pages have already been
     written from this block. If one of yours has a `data:` line in square
     brackets, its table has never rendered.
+
+!!! note "`related:` grew a second shape on 2026-10-11"
+
+    The bare list still works and is still correct: `related: [some-id,
+    another-id]`. What is new is that an entry may carry its own note, as a
+    single-key mapping, and the two forms mix freely in one list.
+
+    The note says **why this page points there**, so it belongs to the
+    relationship rather than to the destination. That is what makes it
+    different from the destination's own `gloss:`, which says one thing to
+    every page that links it. Both are legitimate; they answer different
+    questions.
+
+    ⚠️ Quote the note if it contains a colon, or starts with a backtick or an
+    `@`. YAML reserves both characters at the head of a plain value.
 
 ## Attaching a data table
 
@@ -172,8 +196,15 @@ and sits in this order:
 | 1 | `# Title` | Exactly one H1, matching `title:` |
 | 2 | *generated* | The lede, from `summary:`. Do not type it |
 | 3 | Body `##` sections | Whatever the page is for, including its facts |
-| 4 | `## Related` | Last section. Bare list of `@id` links, one line each |
+| 4 | *generated* | The Related line, from `related:`. Do not type a heading |
 | 5 | *generated* | An index page's contents list, then the keywords line |
+
+~~A `## Related` section, last, holding a bare list of `@id` links.~~ **Struck
+2026-10-11.** It was row 4 of this table and it is now frontmatter: the engine
+draws the line at the foot, resolved by id, and a hand-typed heading prints the
+same links twice. Left visible rather than deleted because thirteen pages in
+this repository were written from the old row, and a row that vanishes teaches
+nobody why their page now says everything twice.
 
 Two things that are always true and cause most of the trouble:
 
@@ -218,6 +249,9 @@ report is the fast version of this list.
     square brackets is the retired form and renders nothing at all.
 14. Does every image carry **alt text that describes it** rather than a label,
     and is any caption in `caption="…"` rather than stuffed into the brackets?
+15. Any hand-typed `## Related`, `## See also` or `## Related pages` heading
+    still in the body? The links belong in `related:`, and a trailing note per
+    bullet comes with them as `- id: why this page points there`.
 
 !!! note "This list does not say how long it is"
 
@@ -276,12 +310,3 @@ indistinguishable from the feature being broken.
 
     If a stranger reading the page would matter, it does not belong in a doc
     repo. Read [Publication states](@publication) before deciding otherwise.
-
-## Related
-
-- [Frontmatter](@frontmatter)
-- [Writing a page](@writing)
-- [Links](@links)
-- [Markers](@markers)
-- [Publication states](@publication)
-- [Routers](@routers)
