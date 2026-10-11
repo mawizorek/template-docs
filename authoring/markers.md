@@ -6,6 +6,11 @@ status: public
 order: 45
 revised: 2026-08
 summary: Inline tags for one value in a sentence -- how much to trust it, what kind of thing it is, and where it lives.
+related:
+  - links: "`@id`, headings, cross-site references, and every prefix"
+  - frontmatter: where required fields are declared
+  - publishing: where the marker report appears
+  - routers: the other inline tool, for routing rather than confidence
 ---
 
 # Markers
@@ -275,10 +280,3 @@ new hue.
 The old rule was written when every marker was a confidence claim, where hue **is**
 the semantics, and then stated about all of them. Worth remembering as a shape: a
 rule derived from one kind of case and stated about every case.
-
-## Related
-
-- [Links](@links) -- `@id`, headings, cross-site references, and every prefix
-- [Frontmatter](@frontmatter) -- where required fields are declared
-- [Publishing](@publishing) -- where the marker report appears
-- [Routers](@routers) -- the other inline tool, for routing rather than confidence
