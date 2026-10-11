@@ -43,10 +43,12 @@ Then [publish](@publishing) -- saving the file does not put it on the site.
 
 ## The rules that actually matter
 
-1. **Every page needs `status` and `summary`.** No status, no build -- that is
-   deliberate, so nothing reaches the public web because somebody forgot a
-   line. No summary, and the page appears in search with nothing under its
-   name.
+1. **Every page needs `status` and `summary`, and only one of them is a gate.**
+   No status, no build -- that is deliberate, so nothing reaches the public web
+   because somebody forgot a line. No summary, and the page still builds and
+   still publishes: you get a line in the build report and a search result with
+   nothing under its name. Ruled 2026-10-11, so that is settled rather than
+   lenient.
 2. **Never change an `id`.** Other pages link to that string, including pages
    on other sites. Changing it breaks them silently.
 3. **Link to ids, never to file paths.** See [Links](@links).
